@@ -2,8 +2,11 @@
 // NARRATIVE JOURNEY ORCHESTRATION
 // ==========================================
 
-// Track which sections have been activated
+// Track which sections have been activated (for typing - only plays once)
 const activatedSections = new Set();
+
+// Track visible sections (for screens - can reactivate)
+const visibleSections = new Set();
 
 // ==========================================
 // TYPING ANIMATION SYSTEM
@@ -60,50 +63,62 @@ function activateSection(section) {
         });
     }
 
-    // Activate screen for this section
-    const screenNum = section.dataset.screen;
-    if (screenNum) {
-        activateScreen(parseInt(screenNum));
-    }
+    // Screen activation is handled separately in the observer
 }
 
 // ==========================================
-// SCREEN PROGRESSION SYSTEM (1 → 2 → 3 → 4 → 5)
+// SCREEN PROGRESSION SYSTEM (BIDIRECTIONAL: 1 ↔ 2 ↔ 3 ↔ 4 ↔ 5)
 // ==========================================
 
-let currentActiveScreen = null;
-
-function activateScreen(screenNumber) {
-    // Find the screen image
+function showScreen(screenNumber) {
     const screen = document.querySelector(`.app-screen[data-screen="${screenNumber}"]`);
 
     if (!screen) return;
 
-    // If there's a previously active screen, deactivate it
-    if (currentActiveScreen && currentActiveScreen !== screen) {
-        currentActiveScreen.classList.remove('active', 'visible');
-    }
-
-    // Activate new screen
+    // Show this screen
     screen.classList.add('visible');
-    currentActiveScreen = screen;
+}
+
+function hideScreen(screenNumber) {
+    const screen = document.querySelector(`.app-screen[data-screen="${screenNumber}"]`);
+
+    if (!screen) return;
+
+    // Hide this screen
+    screen.classList.remove('visible');
 }
 
 // ==========================================
-// SCROLL OBSERVATION SYSTEM
+// SCROLL OBSERVATION SYSTEM (BIDIRECTIONAL)
 // ==========================================
 
 const sectionObserver = new IntersectionObserver(
     (entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Section is in view - activate it
-                const section = entry.target;
-                const progress = entry.intersectionRatio;
+            const section = entry.target;
+            const sectionName = section.dataset.section;
+            const progress = entry.intersectionRatio;
 
-                // Activate when section is at least 30% visible
-                if (progress > 0.3) {
-                    activateSection(section);
+            if (entry.isIntersecting && progress > 0.3) {
+                // Section is coming into view
+                visibleSections.add(sectionName);
+
+                // Activate typing (only first time)
+                activateSection(section);
+
+                // Always show/activate screen when in view
+                const screenNum = section.dataset.screen;
+                if (screenNum) {
+                    showScreen(parseInt(screenNum));
+                }
+            } else {
+                // Section is leaving view
+                visibleSections.delete(sectionName);
+
+                // Hide screen when leaving view
+                const screenNum = section.dataset.screen;
+                if (screenNum) {
+                    hideScreen(parseInt(screenNum));
                 }
             }
         });
@@ -235,47 +250,42 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ==========================================
-// SALT SHAKER INTERACTION
+// HEADER BRAND INTERACTION
 // ==========================================
 
-const saltShaker = document.getElementById('saltShakerLogo');
+const brandTitle = document.querySelector('.brand-title');
 let isShaking = false;
 
-if (saltShaker) {
-    saltShaker.addEventListener('mouseenter', () => {
-        if (!isShaking) {
-            saltShaker.style.transform = 'scale(1.1) rotate(5deg)';
-        }
-    });
-
-    saltShaker.addEventListener('mouseleave', () => {
-        if (!isShaking) {
-            saltShaker.style.transform = 'scale(1) rotate(0deg)';
-        }
-    });
-
-    // Enhanced shake on click with particles effect
-    saltShaker.addEventListener('click', (e) => {
+if (brandTitle) {
+    // Shake on click with particles effect
+    brandTitle.addEventListener('click', (e) => {
         if (isShaking) return;
 
         isShaking = true;
-        saltShaker.style.transition = 'none';
-        saltShaker.style.animation = 'shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97)';
+        const brandIcon = brandTitle.querySelector('.brand-icon');
 
-        // Create particle burst effect
-        createParticleBurst(e.clientX, e.clientY);
+        if (brandIcon) {
+            brandIcon.style.transition = 'none';
+            brandIcon.style.animation = 'shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97)';
 
-        setTimeout(() => {
-            saltShaker.style.animation = '';
-            saltShaker.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            isShaking = false;
-        }, 600);
+            // Create particle burst effect
+            const rect = brandIcon.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            createParticleBurst(x, y);
+
+            setTimeout(() => {
+                brandIcon.style.animation = '';
+                brandIcon.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                isShaking = false;
+            }, 600);
+        }
     });
 }
 
 // Particle burst animation
 function createParticleBurst(x, y) {
-    const colors = ['#56725E', '#3E4F46', '#8B694D', '#8BA888'];
+    const colors = ['#FF6B35', '#FF8C3D', '#FFA500', '#FF9F5C'];
     const particleCount = 12;
 
     for (let i = 0; i < particleCount; i++) {

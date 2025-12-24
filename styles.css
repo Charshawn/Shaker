@@ -23,6 +23,68 @@ body {
 }
 
 /* ==========================================
+   SITE HEADER
+   ========================================== */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+    padding: 1rem 2rem;
+    animation: slideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brand-title:hover {
+    transform: scale(1.05);
+}
+
+.brand-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 8px rgba(255, 107, 53, 0.3));
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2C2416;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+/* ==========================================
    AISLE SECTIONS - SHARED STRUCTURE
    ========================================== */
 
@@ -31,9 +93,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
+    padding: 6rem 2rem 4rem;
     position: relative;
     overflow: hidden;
+}
+
+/* First section gets extra top padding for header */
+.entrance-section {
+    padding-top: 8rem;
 }
 
 .aisle-container {
@@ -132,35 +199,7 @@ body {
     50% { opacity: 0.7; }
 }
 
-.salt-shaker-logo {
-    display: inline-block;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    opacity: 0;
-    animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
-}
-
-@keyframes dropBounce {
-    from {
-        opacity: 0;
-        transform: translateY(-50px) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.salt-shaker-logo:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.shaker-icon {
-    font-size: 3.5rem;
-    display: block;
-    filter: drop-shadow(0 8px 20px rgba(86, 114, 94, 0.3));
-}
+/* Salt shaker logo removed from hero - now in header */
 
 .anchor-headline {
     font-size: 4.5rem;
@@ -631,8 +670,24 @@ body {
 }
 
 @media (max-width: 768px) {
+    .site-header {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .brand-name {
+        font-size: 1.5rem;
+    }
+
+    .brand-icon {
+        font-size: 1.5rem;
+    }
+
     .aisle-section {
         padding: 3rem 1.5rem;
+    }
+
+    .entrance-section {
+        padding-top: 6rem;
     }
 
     .aisle-container {
@@ -690,6 +745,14 @@ body {
 }
 
 @media (max-width: 480px) {
+    .brand-name {
+        font-size: 1.3rem;
+    }
+
+    .brand-icon {
+        font-size: 1.3rem;
+    }
+
     .anchor-headline {
         font-size: 2.2rem;
     }
