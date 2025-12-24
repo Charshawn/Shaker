@@ -113,7 +113,7 @@ body {
    ========================================== */
 
 .entrance-section {
-    background: linear-gradient(135deg, #E8E4DF 0%, #D4CFC7 100%);
+    background: linear-gradient(135deg, #FFF5E8 0%, #FFE9CC 100%);
 }
 
 .entrance-section::before {
@@ -123,7 +123,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(139, 105, 77, 0.08) 0%, transparent 60%);
+    background: radial-gradient(circle at 30% 50%, rgba(255, 140, 60, 0.12) 0%, transparent 60%);
     animation: gentle-pulse 12s ease-in-out infinite;
 }
 
@@ -201,7 +201,7 @@ body {
    ========================================== */
 
 .habit-section {
-    background: linear-gradient(135deg, #DDD8D0 0%, #CDC7BC 100%);
+    background: linear-gradient(135deg, #FFE9CC 0%, #FFDAB3 100%);
 }
 
 /* ==========================================
@@ -209,7 +209,7 @@ body {
    ========================================== */
 
 .overload-section {
-    background: linear-gradient(135deg, #CDC7BC 0%, #BDB6A8 100%);
+    background: linear-gradient(135deg, #FFDAB3 0%, #FFC999 100%);
 }
 
 /* Horizontal shelf parallax */
@@ -284,7 +284,7 @@ body {
    ========================================== */
 
 .discovery-section {
-    background: linear-gradient(135deg, #B5AE9D 0%, #A6A090 100%);
+    background: linear-gradient(135deg, #FFB780 0%, #FF9F5C 100%);
 }
 
 .discovery-section::before {
@@ -294,7 +294,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 60% 50%, rgba(86, 114, 94, 0.15) 0%, transparent 60%);
+    background: radial-gradient(circle at 60% 50%, rgba(255, 107, 0, 0.18) 0%, transparent 60%);
 }
 
 /* ==========================================
@@ -302,7 +302,7 @@ body {
    ========================================== */
 
 .standouts-section {
-    background: linear-gradient(135deg, #A6A090 0%, #96917F 100%);
+    background: linear-gradient(135deg, #FF9F5C 0%, #FF8C3D 100%);
 }
 
 .phone-container-final {
@@ -330,8 +330,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5rem 2rem;
-    background: linear-gradient(135deg, #2C2416 0%, #3E3529 100%);
-    color: #F5F3F0;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    color: #FFFFFF;
     position: relative;
 }
 
@@ -342,7 +342,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.12) 0%, transparent 65%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.18) 0%, transparent 65%);
     animation: gentle-pulse 10s ease-in-out infinite;
 }
 
@@ -368,13 +368,13 @@ body {
 .invitation-subheadline {
     font-size: 1.5rem;
     line-height: 1.5;
-    color: rgba(245, 243, 240, 0.85);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
 }
 
 .invitation-supporting {
     font-size: 1.15rem;
-    color: rgba(245, 243, 240, 0.75);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.7;
     margin-top: 2rem;
 }
@@ -420,7 +420,7 @@ body {
 
 /* Invitation section typing */
 .invitation-section .typed-line {
-    color: #F5F3F0;
+    color: #FFFFFF;
 }
 
 /* Typing animation */
@@ -468,9 +468,9 @@ body {
 
 .email-input:focus {
     outline: none;
-    border-color: #56725E;
-    box-shadow: 0 0 0 4px rgba(86, 114, 94, 0.15),
-                0 8px 24px rgba(86, 114, 94, 0.2);
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15),
+                0 8px 24px rgba(255, 107, 53, 0.25);
     transform: translateY(-2px) scale(1.01);
     background: #FFFFFF;
 }
@@ -488,17 +488,19 @@ body {
     width: 100%;
     padding: 1.4rem 2rem;
     font-size: 1.15rem;
-    font-weight: 600;
-    color: #F5F3F0;
-    background: linear-gradient(135deg, #56725E 0%, #3E4F46 100%);
+    font-weight: 700;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF4500 100%);
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 6px 20px rgba(86, 114, 94, 0.3);
+    box-shadow: 0 8px 24px rgba(255, 69, 0, 0.35);
     font-family: inherit;
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .cta-button::before {
@@ -520,8 +522,8 @@ body {
 }
 
 .cta-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 40px rgba(86, 114, 94, 0.4);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 48px rgba(255, 69, 0, 0.5);
 }
 
 .cta-button:active {
@@ -530,7 +532,7 @@ body {
 
 .trust-line {
     font-size: 0.9rem;
-    color: rgba(245, 243, 240, 0.7);
+    color: rgba(255, 255, 255, 0.75);
     text-align: center;
     margin-top: 0.75rem;
 }
