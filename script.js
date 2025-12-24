@@ -1,185 +1,203 @@
-// Carousel functionality
-let currentSlide = 0;
-const track = document.getElementById('carouselTrack');
-const slides = document.querySelectorAll('.carousel-slide');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const dotsContainer = document.getElementById('carouselDots');
+// ==========================================
+// PHONE SCREEN CYCLING
+// ==========================================
 
-// Create dots
-slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    dotsContainer.appendChild(dot);
-});
+const screen1 = document.getElementById('screen1');
+const screen2 = document.getElementById('screen2');
+let currentScreen = 1;
 
-const dots = document.querySelectorAll('.dot');
-
-function updateCarousel() {
-    const slideWidth = slides[0].offsetWidth;
-    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-
-    // Update dots
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateCarousel();
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateCarousel();
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    updateCarousel();
-}
-
-// Event listeners
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
-
-// Auto-advance carousel every 5 seconds
-let autoAdvance = setInterval(nextSlide, 5000);
-
-// Pause auto-advance on hover
-const carouselContainer = document.querySelector('.carousel-container');
-carouselContainer.addEventListener('mouseenter', () => {
-    clearInterval(autoAdvance);
-});
-
-carouselContainer.addEventListener('mouseleave', () => {
-    autoAdvance = setInterval(nextSlide, 5000);
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') prevSlide();
-    if (e.key === 'ArrowRight') nextSlide();
-});
-
-// Touch swipe support for mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-carouselContainer.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-carouselContainer.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            nextSlide();
-        } else {
-            prevSlide();
-        }
+// Cycle between the two screens every 4 seconds
+function cycleScreens() {
+    if (currentScreen === 1) {
+        screen1.classList.remove('active');
+        screen2.classList.add('active');
+        currentScreen = 2;
+    } else {
+        screen2.classList.remove('active');
+        screen1.classList.add('active');
+        currentScreen = 1;
     }
 }
 
-// Update carousel on window resize
-window.addEventListener('resize', updateCarousel);
+// Start cycling after initial load
+setTimeout(() => {
+    setInterval(cycleScreens, 4000);
+}, 2000);
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// ==========================================
+// AISLE JOURNEY: SCROLL-DRIVEN REVEALS
+// ==========================================
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe feature cards and testimonials for animation
-document.querySelectorAll('.feature-card, .testimonial-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
-
-// Animate stats on scroll
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statNumber = entry.target;
-            const finalValue = statNumber.textContent;
-
-            // Only animate numbers (not ratings with decimals)
-            if (finalValue.includes('K+')) {
-                const numValue = parseInt(finalValue.replace('K+', ''));
-                animateValue(statNumber, 0, numValue, 2000, 'K+');
-            } else if (finalValue === '4.9') {
-                animateValue(statNumber, 0, 4.9, 2000, '');
+const aisleObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
             }
+        });
+    },
+    {
+        threshold: 0.3,
+        rootMargin: '-50px'
+    }
+);
 
-            statsObserver.unobserve(statNumber);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.stat-number').forEach(stat => {
-    statsObserver.observe(stat);
+// Observe all aisle sections
+document.querySelectorAll('.aisle-section').forEach(section => {
+    aisleObserver.observe(section);
 });
 
-function animateValue(element, start, end, duration, suffix = '') {
-    const range = end - start;
-    const increment = range / (duration / 16);
-    let current = start;
+// ==========================================
+// PARALLAX EFFECT FOR STORY SECTIONS
+// ==========================================
 
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= end) {
-            current = end;
-            clearInterval(timer);
-        }
+let ticking = false;
 
-        if (suffix === 'K+') {
-            element.textContent = Math.floor(current) + suffix;
-        } else {
-            element.textContent = current.toFixed(1);
+function applyParallax() {
+    const scrolled = window.pageYOffset;
+
+    // Parallax on story blocks
+    document.querySelectorAll('.story-block').forEach((block, index) => {
+        const offset = (scrolled - block.offsetTop + window.innerHeight) * 0.1;
+        if (Math.abs(offset) < 200) { // Performance guard
+            block.style.transform = `translateY(${offset}px)`;
         }
-    }, 16);
+    });
+
+    ticking = false;
 }
 
-// Add parallax effect to hero
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    if (!ticking) {
+        window.requestAnimationFrame(applyParallax);
+        ticking = true;
     }
+});
+
+// ==========================================
+// SALT SHAKER LOGO INTERACTION
+// ==========================================
+
+const saltShaker = document.getElementById('saltShakerLogo');
+let shakeTimeout;
+
+saltShaker.addEventListener('mouseenter', () => {
+    saltShaker.style.animation = 'none';
+    setTimeout(() => {
+        saltShaker.style.animation = 'gentleBounce 3s ease-in-out infinite';
+    }, 10);
+});
+
+// Shake on click
+saltShaker.addEventListener('click', () => {
+    saltShaker.style.animation = 'shake 0.5s ease-in-out';
+
+    clearTimeout(shakeTimeout);
+    shakeTimeout = setTimeout(() => {
+        saltShaker.style.animation = 'gentleBounce 3s ease-in-out infinite';
+    }, 500);
+});
+
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0) rotate(0deg); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-4px) rotate(-5deg); }
+        20%, 40%, 60%, 80% { transform: translateX(4px) rotate(5deg); }
+    }
+`;
+document.head.appendChild(style);
+
+// ==========================================
+// FORM HANDLING
+// ==========================================
+
+function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const emailInput = form.querySelector('.email-input');
+    const button = form.querySelector('.cta-button');
+    const email = emailInput.value.trim();
+
+    if (!email) return;
+
+    // Store email (you'll replace this with actual API call)
+    console.log('Email submitted:', email);
+
+    // Visual feedback
+    button.textContent = 'You\'re in! 🎉';
+    button.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+    emailInput.disabled = true;
+    button.disabled = true;
+
+    // Optional: Send to backend
+    // fetch('/api/waitlist', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ email })
+    // });
+
+    // Reset after 3 seconds for demo purposes
+    setTimeout(() => {
+        button.textContent = 'Be part of the first pantry';
+        button.style.background = 'linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%)';
+        emailInput.disabled = false;
+        button.disabled = false;
+        emailInput.value = '';
+    }, 3000);
+}
+
+// Attach to both forms
+document.getElementById('waitlistForm').addEventListener('submit', handleFormSubmit);
+document.getElementById('waitlistFormFinal').addEventListener('submit', handleFormSubmit);
+
+// ==========================================
+// INPUT GLOW EFFECT
+// ==========================================
+
+document.querySelectorAll('.email-input').forEach(input => {
+    input.addEventListener('focus', () => {
+        input.style.transition = 'all 0.3s ease, box-shadow 0.3s ease';
+    });
+});
+
+// ==========================================
+// SMOOTH SCROLL POLISH
+// ==========================================
+
+// Add smooth momentum to scroll
+document.documentElement.style.scrollBehavior = 'smooth';
+
+// ==========================================
+// PERFORMANCE: REDUCE MOTION FOR ACCESSIBILITY
+// ==========================================
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Disable all animations for users who prefer reduced motion
+    document.querySelectorAll('*').forEach(el => {
+        el.style.animation = 'none';
+        el.style.transition = 'none';
+    });
+}
+
+// ==========================================
+// LOADING ANIMATION
+// ==========================================
+
+window.addEventListener('load', () => {
+    // Fade in hero content
+    document.querySelector('.hero-left').style.opacity = '0';
+    document.querySelector('.hero-right').style.opacity = '0';
+
+    setTimeout(() => {
+        document.querySelector('.hero-left').style.transition = 'opacity 0.8s ease';
+        document.querySelector('.hero-left').style.opacity = '1';
+    }, 100);
+
+    setTimeout(() => {
+        document.querySelector('.hero-right').style.transition = 'opacity 0.8s ease 0.3s';
+        document.querySelector('.hero-right').style.opacity = '1';
+    }, 200);
 });
