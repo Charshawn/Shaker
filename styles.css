@@ -23,71 +23,118 @@ body {
 }
 
 /* ==========================================
-   HERO SECTION
+   AISLE SECTIONS - SHARED STRUCTURE
    ========================================== */
 
-.hero {
+.aisle-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 5rem 2rem 3rem;
-    background: linear-gradient(135deg, #E8E4DF 0%, #D4CFC7 100%);
+    justify-content: center;
+    padding: 4rem 2rem;
     position: relative;
     overflow: hidden;
 }
 
-/* Animated gradient background */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(139, 105, 77, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(86, 114, 94, 0.08) 0%, transparent 50%);
-    animation: gradientShift 15s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes gradientShift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-10%, -10%) scale(1.1); }
-}
-
-.hero-grid {
+.aisle-container {
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6rem;
     align-items: center;
-    width: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+}
+
+.narrative-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.screen-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 /* ==========================================
-   LEFT COLUMN: COPY + FORM
+   PHONE CONTAINERS & SCREENS
    ========================================== */
 
-.hero-left {
+.phone-container {
+    width: 380px;
+    max-width: 100%;
     position: relative;
-    z-index: 2;
-    opacity: 1;
-    will-change: transform;
+    will-change: transform, opacity;
 }
 
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+.app-screen {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: translateX(-30%) scale(0.95);
+    transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+    filter: drop-shadow(0 30px 80px rgba(44, 36, 22, 0.2));
+}
+
+.app-screen.active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.app-screen.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+/* Screen 4 gets extra "alive" treatment */
+.screen-column-alive .app-screen {
+    animation: subtle-float 6s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+    0%, 100% {
+        transform: translateY(0) scale(1);
     }
+    50% {
+        transform: translateY(-12px) scale(1.01);
+    }
+}
+
+/* ==========================================
+   SECTION 1: ENTRANCE
+   ========================================== */
+
+.entrance-section {
+    background: linear-gradient(135deg, #E8E4DF 0%, #D4CFC7 100%);
+}
+
+.entrance-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(139, 105, 77, 0.08) 0%, transparent 60%);
+    animation: gentle-pulse 12s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
 }
 
 .salt-shaker-logo {
     display: inline-block;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     opacity: 0;
@@ -110,73 +157,26 @@ body {
 }
 
 .shaker-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     display: block;
     filter: drop-shadow(0 8px 20px rgba(86, 114, 94, 0.3));
-    animation: floatShaker 4s ease-in-out infinite;
 }
 
-@keyframes floatShaker {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-6px) rotate(-3deg);
-    }
-    50% {
-        transform: translateY(-12px) rotate(0deg);
-    }
-    75% {
-        transform: translateY(-6px) rotate(3deg);
-    }
-}
-
-.hero-headline {
+.anchor-headline {
     font-size: 4.5rem;
     font-weight: 700;
     line-height: 1.1;
     color: #2C2416;
-    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
-}
-
-.hero-headline .word {
-    display: inline-block;
+    margin-bottom: 1.5rem;
     opacity: 0;
-    transform: translateY(40px);
-    animation: wordCascade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
 }
 
-.hero-headline .word:nth-child(1) { animation-delay: 0.5s; }
-.hero-headline .word:nth-child(2) { animation-delay: 0.65s; }
-.hero-headline .word:nth-child(3) { animation-delay: 0.8s; }
-.hero-headline .word:nth-child(4) { animation-delay: 0.95s; }
-
-@keyframes wordCascade {
-    0% {
-        opacity: 0;
-        transform: translateY(40px) rotate(-2deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) rotate(0deg);
-    }
-}
-
-.hero-subheadline {
-    font-size: 1.35rem;
-    line-height: 1.6;
-    color: #5C5244;
-    margin-bottom: 3rem;
-    max-width: 520px;
-    opacity: 0;
-    animation: fadeInDrift 1s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
-}
-
-@keyframes fadeInDrift {
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -184,41 +184,259 @@ body {
     }
 }
 
-.hero-framing {
-    margin-bottom: 3rem;
-    padding: 1.5rem 0;
-    border-left: 3px solid #56725E;
-    padding-left: 1.5rem;
+.cta-preview {
+    margin-top: 2rem;
     opacity: 0;
-    animation: fadeInDrift 1s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 3s forwards;
+}
+
+.cta-hint {
+    font-size: 0.95rem;
+    color: #807568;
+    font-weight: 500;
+}
+
+/* ==========================================
+   SECTION 2: HABIT
+   ========================================== */
+
+.habit-section {
+    background: linear-gradient(135deg, #DDD8D0 0%, #CDC7BC 100%);
+}
+
+/* ==========================================
+   SECTION 3: OVERLOAD
+   ========================================== */
+
+.overload-section {
+    background: linear-gradient(135deg, #CDC7BC 0%, #BDB6A8 100%);
+}
+
+/* Horizontal shelf parallax */
+.shelf-parallax {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.shelf-layer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    opacity: 0.15;
+}
+
+.shelf-layer-1 {
+    background-image: linear-gradient(90deg,
+        transparent 0%,
+        rgba(86, 114, 94, 0.1) 10%,
+        transparent 20%,
+        rgba(86, 114, 94, 0.1) 30%,
+        transparent 40%);
+    animation: shelf-slide-1 40s linear infinite;
+}
+
+.shelf-layer-2 {
+    background-image: linear-gradient(90deg,
+        transparent 5%,
+        rgba(139, 105, 77, 0.12) 15%,
+        transparent 25%,
+        rgba(139, 105, 77, 0.12) 35%,
+        transparent 45%);
+    animation: shelf-slide-2 55s linear infinite;
+}
+
+.shelf-layer-3 {
+    background-image: linear-gradient(90deg,
+        transparent 10%,
+        rgba(62, 52, 41, 0.08) 20%,
+        transparent 30%,
+        rgba(62, 52, 41, 0.08) 40%,
+        transparent 50%);
+    animation: shelf-slide-3 70s linear infinite;
+}
+
+@keyframes shelf-slide-1 {
+    from { transform: translateX(0); }
+    to { transform: translateX(33.33%); }
+}
+
+@keyframes shelf-slide-2 {
+    from { transform: translateX(0); }
+    to { transform: translateX(-33.33%); }
+}
+
+@keyframes shelf-slide-3 {
+    from { transform: translateX(0); }
+    to { transform: translateX(16.66%); }
+}
+
+/* ==========================================
+   SECTION 4: DISCOVERY
+   ========================================== */
+
+.discovery-section {
+    background: linear-gradient(135deg, #B5AE9D 0%, #A6A090 100%);
+}
+
+.discovery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 60% 50%, rgba(86, 114, 94, 0.15) 0%, transparent 60%);
+}
+
+/* ==========================================
+   SECTION 5: STANDOUTS / CONFIDENCE
+   ========================================== */
+
+.standouts-section {
+    background: linear-gradient(135deg, #A6A090 0%, #96917F 100%);
+}
+
+.phone-container-final {
+    animation: confident-entrance 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes confident-entrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================
+   SECTION 6: INVITATION
+   ========================================== */
+
+.invitation-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #2C2416 0%, #3E3529 100%);
+    color: #F5F3F0;
     position: relative;
 }
 
-.hero-framing::before {
+.invitation-section::before {
     content: '';
     position: absolute;
-    left: -3px;
     top: 0;
-    width: 3px;
-    height: 0;
-    background: #56725E;
-    animation: growBar 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.12) 0%, transparent 65%);
+    animation: gentle-pulse 10s ease-in-out infinite;
 }
 
-@keyframes growBar {
-    to { height: 100%; }
+.invitation-container {
+    max-width: 700px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
-.hero-framing p {
-    font-size: 1.1rem;
-    color: #3E3529;
-    margin-bottom: 0.75rem;
+.invitation-narrative {
+    margin-bottom: 3rem;
+}
+
+.invitation-headline {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.invitation-subheadline {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: rgba(245, 243, 240, 0.85);
+    margin-bottom: 2rem;
+}
+
+.invitation-supporting {
+    font-size: 1.15rem;
+    color: rgba(245, 243, 240, 0.75);
     line-height: 1.7;
+    margin-top: 2rem;
 }
 
-.framing-emphasis {
-    font-weight: 600;
+/* ==========================================
+   TYPED NARRATIVE SYSTEM
+   ========================================== */
+
+.typed-narrative {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.typed-line {
+    font-size: 1.8rem;
+    line-height: 1.5;
     color: #2C2416;
+    font-weight: 400;
+    opacity: 0;
+    will-change: opacity;
+}
+
+/* Sections 2-5 have different text styles */
+.habit-section .typed-line,
+.overload-section .typed-line,
+.discovery-section .typed-line,
+.standouts-section .typed-line {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+/* Overload section gets more intense styling */
+.overload-section .typed-line {
+    font-weight: 600;
+}
+
+/* Standouts section gets confident styling */
+.standouts-section .typed-line {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Invitation section typing */
+.invitation-section .typed-line {
+    color: #F5F3F0;
+}
+
+/* Typing animation */
+@keyframes type-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typed-line.typing {
+    animation: type-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* ==========================================
@@ -226,20 +444,7 @@ body {
    ========================================== */
 
 .waitlist-form {
-    margin-bottom: 0;
-    opacity: 0;
-    animation: slideUpElastic 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.8s forwards;
-}
-
-@keyframes slideUpElastic {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    width: 100%;
 }
 
 .form-group {
@@ -253,9 +458,9 @@ body {
     width: 100%;
     padding: 1.2rem 1.5rem;
     font-size: 1.1rem;
-    border: 2px solid #D4CFC7;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.95);
     color: #2C2416;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     font-family: inherit;
@@ -264,9 +469,10 @@ body {
 .email-input:focus {
     outline: none;
     border-color: #56725E;
-    box-shadow: 0 0 0 4px rgba(86, 114, 94, 0.12),
-                0 8px 24px rgba(86, 114, 94, 0.15);
+    box-shadow: 0 0 0 4px rgba(86, 114, 94, 0.15),
+                0 8px 24px rgba(86, 114, 94, 0.2);
     transform: translateY(-2px) scale(1.01);
+    background: #FFFFFF;
 }
 
 .email-input::placeholder {
@@ -280,7 +486,7 @@ body {
 
 .cta-button {
     width: 100%;
-    padding: 1.3rem 2rem;
+    padding: 1.4rem 2rem;
     font-size: 1.15rem;
     font-weight: 600;
     color: #F5F3F0;
@@ -289,7 +495,7 @@ body {
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 16px rgba(86, 114, 94, 0.25);
+    box-shadow: 0 6px 20px rgba(86, 114, 94, 0.3);
     font-family: inherit;
     position: relative;
     overflow: hidden;
@@ -303,7 +509,7 @@ body {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
 }
@@ -315,7 +521,7 @@ body {
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(86, 114, 94, 0.35);
+    box-shadow: 0 10px 40px rgba(86, 114, 94, 0.4);
 }
 
 .cta-button:active {
@@ -324,268 +530,9 @@ body {
 
 .trust-line {
     font-size: 0.9rem;
-    color: #807568;
+    color: rgba(245, 243, 240, 0.7);
     text-align: center;
     margin-top: 0.75rem;
-}
-
-/* ==========================================
-   RIGHT COLUMN: PHONE MOCKUP
-   ========================================== */
-
-.hero-right {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.phone-mockup-container {
-    position: relative;
-    perspective: 1200px;
-}
-
-.phone-mockup {
-    width: 340px;
-    height: 690px;
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: 0 40px 100px rgba(44, 36, 22, 0.25);
-    position: relative;
-    animation: floatPhone 8s ease-in-out infinite;
-    transform-style: preserve-3d;
-    will-change: transform;
-}
-
-@keyframes floatPhone {
-    0%, 100% {
-        transform: translateY(0px) rotateY(0deg) rotateX(0deg);
-    }
-    25% {
-        transform: translateY(-15px) rotateY(2deg) rotateX(-1deg);
-    }
-    50% {
-        transform: translateY(-20px) rotateY(0deg) rotateX(1deg);
-    }
-    75% {
-        transform: translateY(-15px) rotateY(-2deg) rotateX(-1deg);
-    }
-}
-
-.phone-screen {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border-radius: 0;
-    overflow: hidden;
-    position: relative;
-}
-
-.screen-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transform: translateX(-100%) scale(0.95);
-    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity;
-}
-
-.screen-image.active {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
-
-.screen-image.exiting {
-    opacity: 0;
-    transform: translateX(100%) scale(0.95);
-}
-
-/* ==========================================
-   STORY SECTIONS: AISLE JOURNEY
-   ========================================== */
-
-.story-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.aisle-section {
-    position: relative;
-    opacity: 1;
-}
-
-/* Removed generic in-view class - now handled by scroll-linked JS */
-
-.aisle-section[data-aisle="problem"] {
-    background: linear-gradient(135deg, #EBE7E0 0%, #DDD8D0 100%);
-}
-
-.aisle-section[data-aisle="tension"] {
-    background: linear-gradient(135deg, #DDD8D0 0%, #CDC7BC 100%);
-}
-
-.aisle-section[data-aisle="solution"] {
-    background: linear-gradient(135deg, #CDC7BC 0%, #BDB6A8 100%);
-}
-
-/* Parallax background layers - now scroll-linked */
-.aisle-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.06) 0%, transparent 70%);
-    will-change: opacity, transform;
-}
-
-.aisle-content {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-.story-block {
-    text-align: center;
-}
-
-.story-label {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #56725E;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    background: rgba(86, 114, 94, 0.12);
-    border-radius: 20px;
-    will-change: transform, opacity;
-}
-
-.story-heading {
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #2C2416;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-    will-change: transform, opacity;
-}
-
-.story-text {
-    font-size: 1.5rem;
-    line-height: 1.7;
-    color: #5C5244;
-    max-width: 700px;
-    margin: 0 auto;
-    will-change: transform, opacity;
-}
-
-.story-text em {
-    font-style: italic;
-    color: #56725E;
-    font-weight: 600;
-    position: relative;
-    display: inline-block;
-}
-
-.story-text em::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #56725E, #3E4F46);
-    will-change: width;
-}
-
-/* ==========================================
-   FINAL CTA SECTION
-   ========================================== */
-
-.final-cta-section {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 2rem;
-    background: linear-gradient(135deg, #2C2416 0%, #3E3529 100%);
-    color: #F5F3F0;
-    position: relative;
-    overflow: hidden;
-}
-
-.final-cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.15) 0%, transparent 70%);
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.1); }
-}
-
-.final-cta-content {
-    max-width: 600px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.final-cta-heading {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 3rem;
-    letter-spacing: -0.02em;
-}
-
-.final-form .email-input {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.final-form .email-input:focus {
-    background: #FFFFFF;
-    border-color: #56725E;
-}
-
-.final-form .trust-line {
-    color: rgba(245, 243, 240, 0.7);
 }
 
 /* ==========================================
@@ -616,7 +563,6 @@ body {
 
 .footer-logo {
     font-size: 2rem;
-    animation: floatShaker 4s ease-in-out infinite;
 }
 
 .footer-tagline {
@@ -662,72 +608,73 @@ body {
    ========================================== */
 
 @media (max-width: 1024px) {
-    .hero-grid {
+    .aisle-container {
         gap: 4rem;
     }
 
-    .hero-headline {
+    .anchor-headline {
         font-size: 3.5rem;
     }
 
-    .story-heading {
-        font-size: 3rem;
+    .typed-line {
+        font-size: 1.5rem;
+    }
+
+    .habit-section .typed-line,
+    .overload-section .typed-line,
+    .discovery-section .typed-line,
+    .standouts-section .typed-line {
+        font-size: 1.8rem;
     }
 }
 
 @media (max-width: 768px) {
-    .hero {
-        padding: 3rem 1.5rem 2rem;
+    .aisle-section {
+        padding: 3rem 1.5rem;
     }
 
-    .hero-grid {
+    .aisle-container {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
 
-    .hero-left {
+    .narrative-column {
         order: 1;
     }
 
-    .hero-right {
+    .screen-column {
         order: 2;
     }
 
-    .shaker-icon {
-        font-size: 3rem;
-    }
-
-    .hero-headline {
+    .anchor-headline {
         font-size: 2.8rem;
     }
 
-    .hero-subheadline {
-        font-size: 1.15rem;
+    .typed-line {
+        font-size: 1.3rem;
     }
 
-    .hero-framing p {
-        font-size: 1rem;
+    .habit-section .typed-line,
+    .overload-section .typed-line,
+    .discovery-section .typed-line,
+    .standouts-section .typed-line {
+        font-size: 1.6rem;
     }
 
-    .phone-mockup {
-        width: 280px;
-        height: 570px;
+    .phone-container {
+        width: 320px;
     }
 
-    .story-heading {
+    .invitation-headline {
         font-size: 2.2rem;
     }
 
-    .story-text {
+    .invitation-subheadline {
         font-size: 1.25rem;
     }
 
-    .final-cta-heading {
-        font-size: 2.2rem;
-    }
-
-    .form-group {
-        gap: 0.75rem;
+    .invitation-supporting {
+        font-size: 1rem;
     }
 
     .footer-content {
@@ -741,25 +688,27 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-headline {
+    .anchor-headline {
         font-size: 2.2rem;
     }
 
-    .hero-subheadline {
-        font-size: 1.05rem;
+    .typed-line {
+        font-size: 1.15rem;
     }
 
-    .phone-mockup {
-        width: 240px;
-        height: 490px;
+    .habit-section .typed-line,
+    .overload-section .typed-line,
+    .discovery-section .typed-line,
+    .standouts-section .typed-line {
+        font-size: 1.35rem;
     }
 
-    .story-heading {
-        font-size: 1.8rem;
+    .phone-container {
+        width: 280px;
     }
 
-    .story-text {
-        font-size: 1.1rem;
+    .shaker-icon {
+        font-size: 3rem;
     }
 
     .email-input,

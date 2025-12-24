@@ -7,105 +7,157 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-grid">
-            <!-- Left Column: Copy + Form -->
-            <div class="hero-left">
+    <!-- SECTION 1: ENTRANCE (Screen 1 - Hungry) -->
+    <section class="aisle-section entrance-section" data-section="entrance" data-screen="1">
+        <div class="aisle-container">
+            <!-- Left: Narrative -->
+            <div class="narrative-column">
                 <div class="salt-shaker-logo" id="saltShakerLogo">
                     <span class="shaker-icon">🧂</span>
                 </div>
 
-                <h1 class="hero-headline">Shake up your pantry.</h1>
+                <h1 class="anchor-headline">Shake up your pantry.</h1>
 
-                <p class="hero-subheadline">
-                    Hundreds of new snacks launch every month. We filter the noise — so you find your match.
-                </p>
-
-                <div class="hero-framing">
-                    <p>We're rethinking how pantries are built — starting from taste, not trends.</p>
-                    <p class="framing-emphasis">Join the first group helping us redefine snack discovery.</p>
+                <div class="typed-narrative" data-section="entrance">
+                    <p class="typed-line" data-delay="800">Every month, hundreds of new snacks launch.</p>
+                    <p class="typed-line" data-delay="1600">Most of them never make it into your pantry.</p>
                 </div>
 
-                <form class="waitlist-form" id="waitlistForm">
-                    <div class="form-group">
-                        <input
-                            type="email"
-                            class="email-input"
-                            placeholder="Enter your email"
-                            required
-                            aria-label="Email address"
-                        >
-                        <button type="submit" class="cta-button">
-                            Be part of the first pantry
-                        </button>
-                    </div>
-                    <p class="trust-line">Early access • No spam • 5 seconds</p>
-                </form>
+                <div class="cta-preview">
+                    <p class="cta-hint">↓ Keep scrolling to explore</p>
+                </div>
             </div>
 
-            <!-- Right Column: Phone Mockup + Brand -->
-            <div class="hero-right">
-                <div class="phone-mockup-container">
-                    <div class="phone-mockup">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img
-                                src="Demo App Images/3 - Preferences-Photoroom.png"
-                                alt="Swipe through snack preferences"
-                                class="screen-image active"
-                                id="screen1"
-                            >
-                            <img
-                                src="Demo App Images/4 - Standouts-Photoroom.png"
-                                alt="Discover trending snacks"
-                                class="screen-image"
-                                id="screen2"
-                            >
-                        </div>
-                    </div>
+            <!-- Right: Screen 1 -->
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/1 - Hungry_-Photoroom.png"
+                        alt="Hungry screen - What are you craving?"
+                        class="app-screen active"
+                        data-screen="1"
+                    >
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Story Section: Problem → Tension → Solution -->
-    <section class="story-section aisle-section" data-aisle="problem">
-        <div class="aisle-content">
-            <div class="story-block problem-block">
-                <span class="story-label">The Problem</span>
-                <h2 class="story-heading">Most pantries aren't built intentionally.</h2>
-                <p class="story-text">They're shaped by habit, hype, and whatever happens to be on the shelf.</p>
+    <!-- SECTION 2: HABIT (Screen 2 - What are you looking for) -->
+    <section class="aisle-section habit-section" data-section="habit" data-screen="2">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="habit">
+                    <p class="typed-line" data-delay="400">Most pantries aren't built intentionally.</p>
+                    <p class="typed-line" data-delay="1200">They're built from habit.</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/2 - What are you looking for-Photoroom.png"
+                        alt="What are you looking for screen"
+                        class="app-screen"
+                        data-screen="2"
+                    >
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="story-section aisle-section" data-aisle="tension">
-        <div class="aisle-content">
-            <div class="story-block tension-block">
-                <span class="story-label">The Tension</span>
-                <h2 class="story-heading">New snacks are launching faster than ever—</h2>
-                <p class="story-text">but finding the right ones still feels random.</p>
+    <!-- SECTION 3: OVERLOAD (Screen 3 - Preferences) -->
+    <section class="aisle-section overload-section" data-section="overload" data-screen="3">
+        <!-- Horizontal moving shelf elements -->
+        <div class="shelf-parallax" aria-hidden="true">
+            <div class="shelf-layer shelf-layer-1"></div>
+            <div class="shelf-layer shelf-layer-2"></div>
+            <div class="shelf-layer shelf-layer-3"></div>
+        </div>
+
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="overload">
+                    <p class="typed-line" data-delay="400">Hundreds of new snacks.</p>
+                    <p class="typed-line" data-delay="1000">Too many choices.</p>
+                    <p class="typed-line" data-delay="1600">No clear signal.</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/3 - Preferences-Photoroom.png"
+                        alt="Preferences screen - Filter your preferences"
+                        class="app-screen"
+                        data-screen="3"
+                    >
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="story-section aisle-section" data-aisle="solution">
-        <div class="aisle-content">
-            <div class="story-block solution-block">
-                <span class="story-label">The Solution</span>
-                <h2 class="story-heading">We're building a better way:</h2>
-                <p class="story-text">A pantry shaped around <em>you</em> — your taste, your curiosities, your staples.</p>
+    <!-- SECTION 4: DISCOVERY (Screen 4 - Standouts) -->
+    <section class="aisle-section discovery-section" data-section="discovery" data-screen="4">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="discovery">
+                    <p class="typed-line" data-delay="400">What if discovery felt simple?</p>
+                    <p class="typed-line" data-delay="1400">What if it felt built for you?</p>
+                </div>
+            </div>
+
+            <div class="screen-column screen-column-alive">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/4 - Standouts-Photoroom.png"
+                        alt="Standouts screen - Discover personalized snacks"
+                        class="app-screen"
+                        data-screen="4"
+                    >
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Final Waitlist CTA -->
-    <section class="final-cta-section">
-        <div class="final-cta-content">
-            <h2 class="final-cta-heading">Ready to build your perfect pantry?</h2>
+    <!-- SECTION 5: STANDOUTS / CONFIDENCE (Screen 5 - Swipe) -->
+    <section class="aisle-section standouts-section" data-section="standouts" data-screen="5">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="standouts">
+                    <p class="typed-line" data-delay="400">Not trends.</p>
+                    <p class="typed-line" data-delay="1000">Not hype.</p>
+                    <p class="typed-line" data-delay="1600">Just snacks worth trying.</p>
+                </div>
+            </div>
 
-            <form class="waitlist-form final-form" id="waitlistFormFinal">
+            <div class="screen-column">
+                <div class="phone-container phone-container-final">
+                    <img
+                        src="Demo App Images/5 - Swipe-Photoroom.png"
+                        alt="Swipe screen - Discover your perfect snack"
+                        class="app-screen"
+                        data-screen="5"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: INVITATION (CTA Moment) -->
+    <section class="invitation-section" data-section="invitation">
+        <div class="invitation-container">
+            <div class="invitation-narrative">
+                <div class="typed-narrative" data-section="invitation">
+                    <h2 class="invitation-headline">
+                        <span class="typed-line" data-delay="400">We're rethinking how pantries are built.</span>
+                    </h2>
+                    <p class="invitation-subheadline typed-line" data-delay="1200">Starting from taste, not trends.</p>
+                </div>
+
+                <p class="invitation-supporting">Join the first group helping us redefine snack discovery.</p>
+            </div>
+
+            <form class="waitlist-form" id="waitlistForm">
                 <div class="form-group">
                     <input
                         type="email"
@@ -115,7 +167,7 @@
                         aria-label="Email address"
                     >
                     <button type="submit" class="cta-button">
-                        Join the pantry revolution
+                        Be part of the first pantry
                     </button>
                 </div>
                 <p class="trust-line">Early access • No spam • 5 seconds</p>
