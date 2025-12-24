@@ -16,8 +16,8 @@ html {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif;
-    background: #FAFAF8;
-    color: #1A1A1A;
+    background: #F5F3F0;
+    color: #2C2416;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -31,7 +31,7 @@ body {
     display: flex;
     align-items: center;
     padding: 5rem 2rem 3rem;
-    background: linear-gradient(135deg, #FFF9F0 0%, #FFEFD5 100%);
+    background: linear-gradient(135deg, #E8E4DF 0%, #D4CFC7 100%);
     position: relative;
     overflow: hidden;
 }
@@ -44,8 +44,8 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 200, 100, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 30% 50%, rgba(139, 105, 77, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(86, 114, 94, 0.08) 0%, transparent 50%);
     animation: gradientShift 15s ease-in-out infinite;
     pointer-events: none;
 }
@@ -74,9 +74,8 @@ body {
 .hero-left {
     position: relative;
     z-index: 2;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    opacity: 1;
+    will-change: transform;
 }
 
 @keyframes fadeInUp {
@@ -91,6 +90,19 @@ body {
     margin-bottom: 2rem;
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    animation: dropBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+@keyframes dropBounce {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .salt-shaker-logo:hover {
@@ -100,7 +112,7 @@ body {
 .shaker-icon {
     font-size: 4rem;
     display: block;
-    filter: drop-shadow(0 8px 20px rgba(255, 140, 0, 0.25));
+    filter: drop-shadow(0 8px 20px rgba(86, 114, 94, 0.3));
     animation: floatShaker 4s ease-in-out infinite;
 }
 
@@ -123,30 +135,62 @@ body {
     font-size: 4.5rem;
     font-weight: 700;
     line-height: 1.1;
-    color: #1A1A1A;
+    color: #2C2416;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+}
+
+.hero-headline .word {
+    display: inline-block;
     opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    transform: translateY(40px);
+    animation: wordCascade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-headline .word:nth-child(1) { animation-delay: 0.5s; }
+.hero-headline .word:nth-child(2) { animation-delay: 0.65s; }
+.hero-headline .word:nth-child(3) { animation-delay: 0.8s; }
+.hero-headline .word:nth-child(4) { animation-delay: 0.95s; }
+
+@keyframes wordCascade {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) rotate(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
 }
 
 .hero-subheadline {
     font-size: 1.35rem;
     line-height: 1.6;
-    color: #4A4A4A;
+    color: #5C5244;
     margin-bottom: 3rem;
     max-width: 520px;
     opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+    animation: fadeInDrift 1s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+}
+
+@keyframes fadeInDrift {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-framing {
     margin-bottom: 3rem;
     padding: 1.5rem 0;
-    border-left: 3px solid #FF8C00;
+    border-left: 3px solid #56725E;
     padding-left: 1.5rem;
     opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+    animation: fadeInDrift 1s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
     position: relative;
 }
 
@@ -157,7 +201,7 @@ body {
     top: 0;
     width: 3px;
     height: 0;
-    background: #FF8C00;
+    background: #56725E;
     animation: growBar 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
 }
 
@@ -167,14 +211,14 @@ body {
 
 .hero-framing p {
     font-size: 1.1rem;
-    color: #2A2A2A;
+    color: #3E3529;
     margin-bottom: 0.75rem;
     line-height: 1.7;
 }
 
 .framing-emphasis {
     font-weight: 600;
-    color: #1A1A1A;
+    color: #2C2416;
 }
 
 /* ==========================================
@@ -184,7 +228,18 @@ body {
 .waitlist-form {
     margin-bottom: 0;
     opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.1s forwards;
+    animation: slideUpElastic 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.8s forwards;
+}
+
+@keyframes slideUpElastic {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .form-group {
@@ -198,19 +253,19 @@ body {
     width: 100%;
     padding: 1.2rem 1.5rem;
     font-size: 1.1rem;
-    border: 2px solid #E0E0E0;
+    border: 2px solid #D4CFC7;
     border-radius: 12px;
     background: #FFFFFF;
-    color: #1A1A1A;
+    color: #2C2416;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     font-family: inherit;
 }
 
 .email-input:focus {
     outline: none;
-    border-color: #FF8C00;
-    box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.15),
-                0 8px 24px rgba(255, 140, 0, 0.2);
+    border-color: #56725E;
+    box-shadow: 0 0 0 4px rgba(86, 114, 94, 0.12),
+                0 8px 24px rgba(86, 114, 94, 0.15);
     transform: translateY(-2px) scale(1.01);
 }
 
@@ -228,13 +283,13 @@ body {
     padding: 1.3rem 2rem;
     font-size: 1.15rem;
     font-weight: 600;
-    color: #FFFFFF;
-    background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
+    color: #F5F3F0;
+    background: linear-gradient(135deg, #56725E 0%, #3E4F46 100%);
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(86, 114, 94, 0.25);
     font-family: inherit;
     position: relative;
     overflow: hidden;
@@ -260,7 +315,7 @@ body {
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(255, 140, 0, 0.45);
+    box-shadow: 0 8px 32px rgba(86, 114, 94, 0.35);
 }
 
 .cta-button:active {
@@ -269,7 +324,7 @@ body {
 
 .trust-line {
     font-size: 0.9rem;
-    color: #777;
+    color: #807568;
     text-align: center;
     margin-top: 0.75rem;
 }
@@ -284,14 +339,17 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    animation: fadeInScale 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
 }
 
 @keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1);
     }
 }
 
@@ -303,13 +361,14 @@ body {
 .phone-mockup {
     width: 340px;
     height: 690px;
-    background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
-    border-radius: 48px;
-    padding: 12px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: 0 40px 100px rgba(44, 36, 22, 0.25);
     position: relative;
     animation: floatPhone 8s ease-in-out infinite;
     transform-style: preserve-3d;
+    will-change: transform;
 }
 
 @keyframes floatPhone {
@@ -327,27 +386,13 @@ body {
     }
 }
 
-.phone-notch {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140px;
-    height: 30px;
-    background: #1A1A1A;
-    border-radius: 0 0 18px 18px;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
 .phone-screen {
     width: 100%;
     height: 100%;
-    background: #FFFFFF;
-    border-radius: 38px;
+    background: transparent;
+    border-radius: 0;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 .screen-image {
@@ -358,14 +403,20 @@ body {
     top: 0;
     left: 0;
     opacity: 0;
-    transform: scale(1.05);
-    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-100%) scale(0.95);
+    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
 }
 
 .screen-image.active {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(0) scale(1);
+}
+
+.screen-image.exiting {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
 }
 
 /* ==========================================
@@ -383,30 +434,25 @@ body {
 }
 
 .aisle-section {
-    opacity: 0;
-    transform: translateX(120px) scale(0.95);
-    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    opacity: 1;
 }
 
-.aisle-section.in-view {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
+/* Removed generic in-view class - now handled by scroll-linked JS */
 
 .aisle-section[data-aisle="problem"] {
-    background: linear-gradient(135deg, #FFF5E6 0%, #FFE4CC 100%);
+    background: linear-gradient(135deg, #EBE7E0 0%, #DDD8D0 100%);
 }
 
 .aisle-section[data-aisle="tension"] {
-    background: linear-gradient(135deg, #FFE4CC 0%, #FFD4B3 100%);
+    background: linear-gradient(135deg, #DDD8D0 0%, #CDC7BC 100%);
 }
 
 .aisle-section[data-aisle="solution"] {
-    background: linear-gradient(135deg, #FFD4B3 0%, #FFC299 100%);
+    background: linear-gradient(135deg, #CDC7BC 0%, #BDB6A8 100%);
 }
 
-/* Parallax background layers */
+/* Parallax background layers - now scroll-linked */
 .aisle-section::before {
     content: '';
     position: absolute;
@@ -414,13 +460,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.08) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 1.2s ease;
-}
-
-.aisle-section.in-view::before {
-    opacity: 1;
+    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.06) 0%, transparent 70%);
+    will-change: opacity, transform;
 }
 
 .aisle-content {
@@ -440,60 +481,36 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #FF8C00;
+    color: #56725E;
     margin-bottom: 1.5rem;
     padding: 0.5rem 1.5rem;
-    background: rgba(255, 140, 0, 0.12);
+    background: rgba(86, 114, 94, 0.12);
     border-radius: 20px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s,
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
-}
-
-.aisle-section.in-view .story-label {
-    opacity: 1;
-    transform: translateY(0);
+    will-change: transform, opacity;
 }
 
 .story-heading {
     font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.2;
-    color: #1A1A1A;
+    color: #2C2416;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s,
-                transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s;
-}
-
-.aisle-section.in-view .story-heading {
-    opacity: 1;
-    transform: translateY(0);
+    will-change: transform, opacity;
 }
 
 .story-text {
     font-size: 1.5rem;
     line-height: 1.7;
-    color: #4A4A4A;
+    color: #5C5244;
     max-width: 700px;
     margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s,
-                transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s;
-}
-
-.aisle-section.in-view .story-text {
-    opacity: 1;
-    transform: translateY(0);
+    will-change: transform, opacity;
 }
 
 .story-text em {
     font-style: italic;
-    color: #FF8C00;
+    color: #56725E;
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -506,12 +523,8 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #FF8C00, #FF6B00);
-    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1s;
-}
-
-.aisle-section.in-view .story-text em::after {
-    width: 100%;
+    background: linear-gradient(90deg, #56725E, #3E4F46);
+    will-change: width;
 }
 
 /* ==========================================
@@ -524,8 +537,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5rem 2rem;
-    background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #2C2416 0%, #3E3529 100%);
+    color: #F5F3F0;
     position: relative;
     overflow: hidden;
 }
@@ -537,7 +550,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(86, 114, 94, 0.15) 0%, transparent 70%);
     animation: pulse 8s ease-in-out infinite;
 }
 
@@ -568,11 +581,11 @@ body {
 
 .final-form .email-input:focus {
     background: #FFFFFF;
-    border-color: #FF8C00;
+    border-color: #56725E;
 }
 
 .final-form .trust-line {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(245, 243, 240, 0.7);
 }
 
 /* ==========================================
@@ -580,9 +593,9 @@ body {
    ========================================== */
 
 .footer {
-    background: #0A0A0A;
+    background: #1A1610;
     padding: 3rem 2rem 2rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(245, 243, 240, 0.7);
 }
 
 .footer-content {
@@ -608,7 +621,7 @@ body {
 
 .footer-tagline {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(245, 243, 240, 0.6);
 }
 
 .footer-links {
@@ -617,7 +630,7 @@ body {
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(245, 243, 240, 0.7);
     text-decoration: none;
     font-size: 0.95rem;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -631,12 +644,12 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #FF8C00;
+    background: #56725E;
     transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .footer-links a:hover {
-    color: #FF8C00;
+    color: #8BA888;
     transform: translateY(-2px);
 }
 
@@ -773,6 +786,6 @@ body {
 a:focus,
 button:focus,
 input:focus {
-    outline: 2px solid #FF8C00;
+    outline: 2px solid #56725E;
     outline-offset: 2px;
 }

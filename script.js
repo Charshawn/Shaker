@@ -1,5 +1,17 @@
 // ==========================================
-// SMOOTH PHONE SCREEN CYCLING WITH SWIPE EFFECT
+// HERO HEADLINE WORD CASCADE
+// ==========================================
+
+// Split headline into individual words for cascade animation
+const headline = document.querySelector('.hero-headline');
+if (headline) {
+    const text = headline.textContent;
+    const words = text.split(' ');
+    headline.innerHTML = words.map(word => `<span class="word">${word} </span>`).join('');
+}
+
+// ==========================================
+// LEFT-TO-RIGHT SWIPE TRANSITION FOR PHONE SCREENS
 // ==========================================
 
 const screen1 = document.getElementById('screen1');
@@ -9,28 +21,27 @@ let cycleInterval;
 
 function cycleScreens() {
     if (currentScreen === 1) {
-        // Smooth fade and scale transition
-        screen1.style.transform = 'scale(1.05) translateX(-30px)';
-        screen1.style.opacity = '0';
+        // Current screen exits to the right
+        screen1.classList.add('exiting');
 
+        // Next screen enters from the left
         setTimeout(() => {
             screen1.classList.remove('active');
             screen2.classList.add('active');
-            screen2.style.transform = 'scale(1) translateX(0)';
-            screen2.style.opacity = '1';
-        }, 750);
+            screen1.classList.remove('exiting');
+        }, 100);
 
         currentScreen = 2;
     } else {
-        screen2.style.transform = 'scale(1.05) translateX(-30px)';
-        screen2.style.opacity = '0';
+        // Current screen exits to the right
+        screen2.classList.add('exiting');
 
+        // Next screen enters from the left
         setTimeout(() => {
             screen2.classList.remove('active');
             screen1.classList.add('active');
-            screen1.style.transform = 'scale(1) translateX(0)';
-            screen1.style.opacity = '1';
-        }, 750);
+            screen2.classList.remove('exiting');
+        }, 100);
 
         currentScreen = 1;
     }
@@ -42,77 +53,223 @@ setTimeout(() => {
 }, 3000);
 
 // ==========================================
-// ENHANCED AISLE JOURNEY: SMOOTH SCROLL REVEALS
+// HIGHLY INTERACTIVE SCROLL-LINKED ANIMATIONS
 // ==========================================
 
-const aisleObserver = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Staggered reveal for child elements
-                setTimeout(() => {
-                    entry.target.classList.add('in-view');
-                }, index * 100);
-            }
-        });
-    },
-    {
-        threshold: 0.25,
-        rootMargin: '-80px'
+// Scroll state
+let scrollY = 0;
+let targetScrollY = 0;
+let scrollVelocity = 0;
+let lastScrollY = 0;
+
+// Update scroll position
+function updateScroll() {
+    targetScrollY = window.pageYOffset;
+    scrollVelocity = Math.abs(targetScrollY - lastScrollY);
+    lastScrollY = targetScrollY;
+}
+
+window.addEventListener('scroll', updateScroll, { passive: true });
+
+// Calculate element scroll progress (0 to 1)
+function getScrollProgress(element) {
+    const rect = element.getBoundingClientRect();
+    const elementTop = rect.top;
+    const elementHeight = rect.height;
+    const windowHeight = window.innerHeight;
+
+    // Element is centered in viewport = 1, offscreen = 0
+    const scrollProgress = 1 - Math.abs(elementTop - (windowHeight / 2)) / (windowHeight / 2 + elementHeight / 2);
+
+    return Math.max(0, Math.min(1, scrollProgress));
+}
+
+// Easing functions for different effects
+const easing = {
+    easeOutCubic: (t) => 1 - Math.pow(1 - t, 3),
+    easeOutQuart: (t) => 1 - Math.pow(1 - t, 4),
+    easeOutElastic: (t) => {
+        const c4 = (2 * Math.PI) / 3;
+        return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
     }
-);
+};
 
-// Observe all aisle sections
-document.querySelectorAll('.aisle-section').forEach(section => {
-    aisleObserver.observe(section);
-});
+// Animate story sections with vertical cascade
+function animateStorySections() {
+    const sections = document.querySelectorAll('.aisle-section');
+
+    sections.forEach((section) => {
+        const progress = getScrollProgress(section);
+        const aisleType = section.dataset.aisle;
+
+        const label = section.querySelector('.story-label');
+        const heading = section.querySelector('.story-heading');
+        const text = section.querySelector('.story-text');
+        const background = section.querySelector('.aisle-section::before') || section;
+
+        // Different choreography for each section
+        if (aisleType === 'problem') {
+            // Label drops from above
+            if (label) {
+                const labelProgress = easing.easeOutCubic(Math.max(0, (progress - 0.1) * 1.5));
+                label.style.opacity = labelProgress;
+                label.style.transform = `translateY(${(1 - labelProgress) * -40}px) rotate(${(1 - labelProgress) * -2}deg)`;
+            }
+
+            // Heading rises from below
+            if (heading) {
+                const headingProgress = easing.easeOutQuart(Math.max(0, (progress - 0.2) * 1.4));
+                heading.style.opacity = headingProgress;
+                heading.style.transform = `translateY(${(1 - headingProgress) * 50}px) scale(${0.95 + headingProgress * 0.05})`;
+            }
+
+            // Text fades in place
+            if (text) {
+                const textProgress = easing.easeOutCubic(Math.max(0, (progress - 0.3) * 1.3));
+                text.style.opacity = textProgress;
+                text.style.filter = `blur(${(1 - textProgress) * 8}px)`;
+            }
+        } else if (aisleType === 'tension') {
+            // Label rises from below
+            if (label) {
+                const labelProgress = easing.easeOutCubic(Math.max(0, (progress - 0.1) * 1.5));
+                label.style.opacity = labelProgress;
+                label.style.transform = `translateY(${(1 - labelProgress) * 30}px)`;
+            }
+
+            // Heading drops from above
+            if (heading) {
+                const headingProgress = easing.easeOutQuart(Math.max(0, (progress - 0.2) * 1.4));
+                heading.style.opacity = headingProgress;
+                heading.style.transform = `translateY(${(1 - headingProgress) * -50}px) scale(${0.95 + headingProgress * 0.05})`;
+            }
+
+            // Text slides up
+            if (text) {
+                const textProgress = easing.easeOutCubic(Math.max(0, (progress - 0.3) * 1.3));
+                text.style.opacity = textProgress;
+                text.style.transform = `translateY(${(1 - textProgress) * 20}px)`;
+            }
+        } else if (aisleType === 'solution') {
+            // Label scales from larger
+            if (label) {
+                const labelProgress = easing.easeOutCubic(Math.max(0, (progress - 0.1) * 1.5));
+                label.style.opacity = labelProgress;
+                label.style.transform = `scale(${1.05 - labelProgress * 0.05})`;
+            }
+
+            // Heading rises with elastic bounce
+            if (heading) {
+                const headingProgress = easing.easeOutElastic(Math.max(0, (progress - 0.2) * 1.4));
+                heading.style.opacity = Math.min(1, progress * 2);
+                heading.style.transform = `translateY(${(1 - headingProgress) * 40}px) scale(${0.95 + headingProgress * 0.05})`;
+            }
+
+            // Text letter-spacing effect
+            if (text) {
+                const textProgress = easing.easeOutCubic(Math.max(0, (progress - 0.3) * 1.3));
+                text.style.opacity = textProgress;
+                text.style.letterSpacing = `${(1 - textProgress) * 0.2}em`;
+            }
+        }
+
+        // Background parallax
+        section.style.setProperty('--bg-opacity', progress);
+    });
+}
+
+// Add CSS variable support for background
+if (!document.querySelector('style[data-scroll-bg]')) {
+    const style = document.createElement('style');
+    style.textContent = `
+        .aisle-section::before {
+            opacity: var(--bg-opacity, 0);
+        }
+    `;
+    style.setAttribute('data-scroll-bg', 'true');
+    document.head.appendChild(style);
+}
+
+// Performance: Detect reduced motion preference
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Animate underlines on story text emphasis
+function animateUnderlines() {
+    document.querySelectorAll('.aisle-section').forEach(section => {
+        const progress = getScrollProgress(section);
+        const em = section.querySelector('.story-text em');
+
+        if (em && progress > 0.6) {
+            const underlineProgress = Math.min(1, (progress - 0.6) * 2.5);
+            const afterEl = em;
+            if (afterEl) {
+                afterEl.style.setProperty('--underline-width', `${underlineProgress * 100}%`);
+            }
+        }
+    });
+}
+
+// Add underline animation CSS variable
+if (!document.querySelector('style[data-underline]')) {
+    const style = document.createElement('style');
+    style.textContent = `
+        .story-text em::after {
+            width: var(--underline-width, 0);
+            transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    `;
+    style.setAttribute('data-underline', 'true');
+    document.head.appendChild(style);
+}
 
 // ==========================================
-// SMOOTHER PARALLAX WITH LERP (LINEAR INTERPOLATION)
+// MAIN ANIMATION LOOP WITH RAF
 // ==========================================
 
-let scrollY = window.pageYOffset;
-let targetScrollY = scrollY;
-let currentScrollY = scrollY;
-let ticking = false;
+let currentScrollY = 0;
 
 // Smooth scroll interpolation
 function lerp(start, end, factor) {
     return start + (end - start) * factor;
 }
 
-function smoothParallax() {
-    currentScrollY = lerp(currentScrollY, targetScrollY, 0.1);
+function mainAnimationLoop() {
+    // Skip animations if user prefers reduced motion
+    if (prefersReducedMotion) {
+        requestAnimationFrame(mainAnimationLoop);
+        return;
+    }
 
-    // Apply parallax to story blocks with smooth easing
-    document.querySelectorAll('.story-block').forEach((block) => {
-        const rect = block.getBoundingClientRect();
-        const scrollProgress = 1 - Math.abs(rect.top / window.innerHeight);
+    // Smooth interpolation
+    currentScrollY = lerp(currentScrollY, targetScrollY, 0.08);
 
-        if (scrollProgress > 0 && scrollProgress < 1) {
-            const offset = (currentScrollY - block.offsetTop + window.innerHeight) * 0.05;
-            block.style.transform = `translateY(${offset}px)`;
-        }
-    });
+    // Run all scroll-linked animations
+    animateStorySections();
+    animateUnderlines();
 
-    // Apply subtle parallax to phone mockup
+    // Subtle parallax for phone mockup in hero
     const phone = document.querySelector('.phone-mockup');
-    if (phone && currentScrollY < window.innerHeight) {
-        const phoneOffset = currentScrollY * 0.15;
+    if (phone && targetScrollY < window.innerHeight) {
+        const phoneOffset = currentScrollY * 0.12;
         phone.style.transform = `translateY(${phoneOffset}px)`;
     }
 
+    // Parallax for story backgrounds (only for visible sections)
+    const sections = document.querySelectorAll('.aisle-section');
+    sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const parallaxY = (rect.top - window.innerHeight / 2) * 0.08;
+            section.style.backgroundPosition = `center ${parallaxY}px`;
+        }
+    });
+
     // Continue animation loop
-    requestAnimationFrame(smoothParallax);
+    requestAnimationFrame(mainAnimationLoop);
 }
 
-// Update target scroll position
-window.addEventListener('scroll', () => {
-    targetScrollY = window.pageYOffset;
-}, { passive: true });
-
-// Start smooth parallax
-smoothParallax();
+// Start main animation loop
+mainAnimationLoop();
 
 // ==========================================
 // ENHANCED SALT SHAKER INTERACTION
@@ -153,7 +310,7 @@ saltShaker.addEventListener('click', (e) => {
 
 // Particle burst animation
 function createParticleBurst(x, y) {
-    const colors = ['#FF8C00', '#FF6B00', '#FFA500'];
+    const colors = ['#56725E', '#3E4F46', '#8B694D', '#8BA888'];
     const particleCount = 12;
 
     for (let i = 0; i < particleCount; i++) {
@@ -251,7 +408,7 @@ function handleFormSubmit(e) {
 
 // Confetti celebration
 function createConfetti() {
-    const colors = ['#FF8C00', '#FF6B00', '#FFA500', '#10B981', '#FFD700'];
+    const colors = ['#56725E', '#3E4F46', '#8B694D', '#10B981', '#8BA888'];
     const confettiCount = 30;
 
     for (let i = 0; i < confettiCount; i++) {
