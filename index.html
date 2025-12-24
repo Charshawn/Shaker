@@ -3,32 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaker</title>
+    <title>Shaker - Never Miss the Perfect Meal</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Shaker</h1>
-            <p class="tagline">Shake things up</p>
-        </header>
-
-        <main>
-            <div class="shake-box" id="shakeBox">
-                <p>Click or shake me!</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in">Find Your Perfect Meal in Seconds</h1>
+            <p class="hero-subtitle animate-fade-in-delay-1">Swipe, shake, and discover restaurants that match your cravings. No more endless scrolling.</p>
+            <div class="cta-buttons animate-fade-in-delay-2">
+                <a href="#demo" class="btn btn-primary">See How It Works</a>
+                <a href="#download" class="btn btn-secondary">Download Now</a>
             </div>
-
-            <div class="counter">
-                <p>Shakes: <span id="shakeCount">0</span></p>
+            <div class="hero-stats animate-fade-in-delay-3">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Meals Discovered</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4.9</span>
+                    <span class="stat-label">App Store Rating</span>
+                </div>
             </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-            <button class="reset-btn" id="resetBtn">Reset</button>
-        </main>
+    <!-- App Demo Carousel Section -->
+    <section id="demo" class="demo-section">
+        <div class="section-header">
+            <h2 class="section-title">Experience the Magic</h2>
+            <p class="section-subtitle">Shaker makes finding your next meal effortless and fun</p>
+        </div>
 
-        <footer>
-            <p>&copy; 2025 Shaker</p>
-        </footer>
-    </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" id="prevBtn" aria-label="Previous">‹</button>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <img src="Demo App Images/1 - Hungry?.png" alt="Shaker app hungry screen">
+                        <div class="slide-caption">
+                            <h3>Feeling Hungry?</h3>
+                            <p>Start your food journey with a simple tap</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="Demo App Images/2 - What are you looking for.png" alt="Shaker app search preferences">
+                        <div class="slide-caption">
+                            <h3>Tell Us What You Want</h3>
+                            <p>Choose your cuisine, budget, and mood</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="Demo App Images/3 - Preferences.png" alt="Shaker app preferences screen">
+                        <div class="slide-caption">
+                            <h3>Set Your Preferences</h3>
+                            <p>Customize your dining experience</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="Demo App Images/4 - Standouts.png" alt="Shaker app standout restaurants">
+                        <div class="slide-caption">
+                            <h3>Discover Standouts</h3>
+                            <p>Find highly-rated gems near you</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="Demo App Images/5 - Swipe.png" alt="Shaker app swipe feature">
+                        <div class="slide-caption">
+                            <h3>Swipe to Decide</h3>
+                            <p>Shake your phone or swipe to find your match</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" id="nextBtn" aria-label="Next">›</button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose Shaker?</h2>
+            <p class="section-subtitle">The fastest way from hungry to happy</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Personalized Matches</h3>
+                <p>Our smart algorithm learns your preferences and suggests restaurants you'll love</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Find the perfect spot in under 30 seconds. No more decision paralysis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Shake to Decide</h3>
+                <p>Can't choose? Just shake your phone and let fate decide your next meal</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Curated Selection</h3>
+                <p>Only the best restaurants make it to your feed. Quality over quantity</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Budget Friendly</h3>
+                <p>Filter by price range and find amazing food that fits your wallet</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Local Gems</h3>
+                <p>Discover hidden spots and neighborhood favorites you never knew existed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="section-header">
+            <h2 class="section-title">Loved by Food Lovers</h2>
+            <p class="section-subtitle">Join thousands who've upgraded their dining experience</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"This app is a game changer! I used to spend 20 minutes deciding where to eat. Now it takes seconds."</p>
+                <p class="testimonial-author">— Sarah M.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The shake feature is genius. It's like having a food-savvy friend who always knows the best spots."</p>
+                <p class="testimonial-author">— James K.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Found so many amazing local restaurants I never would have discovered otherwise. Absolutely love it!"</p>
+                <p class="testimonial-author">— Maria L.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="download" class="final-cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Shake Things Up?</h2>
+            <p class="cta-subtitle">Join thousands of happy diners and never have a boring meal again</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary btn-large">Download for iOS</a>
+                <a href="#" class="btn btn-secondary btn-large">Download for Android</a>
+            </div>
+            <p class="cta-note">Free to download • No credit card required</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Shaker</h3>
+                <p>Your perfect meal is just a shake away</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <a href="#">Features</a>
+                    <a href="#">How It Works</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Careers</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Shaker. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
