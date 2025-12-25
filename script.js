@@ -1,4 +1,10 @@
 // ==========================================
+// GOOGLE SHEETS CONFIGURATION
+// ==========================================
+
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwoXZIOB6-PdzWpUYMYZcA8c9vd3qbFLJDTu6W_9B7nusmYdJjExjw1ugD0r3_i1AkQ/exec';
+
+// ==========================================
 // NARRATIVE JOURNEY ORCHESTRATION
 // ==========================================
 
@@ -147,7 +153,7 @@ function initializeEntranceSection() {
 // FORM HANDLING
 // ==========================================
 
-function handleFormSubmit(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
 
     const form = e.target;
@@ -166,26 +172,63 @@ function handleFormSubmit(e) {
     button.style.transform = 'scale(0.95)';
     button.style.opacity = '0.7';
     button.textContent = 'Adding you...';
+    button.disabled = true;
 
-    setTimeout(() => {
-        // Success state with smooth transition
+    try {
+        // Submit to Google Sheets
+        const formData = new FormData();
+        formData.append('email', email);
+
+        const response = await fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.result === 'duplicate') {
+            // Duplicate email
+            button.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            button.style.transform = 'scale(1)';
+            button.style.opacity = '1';
+            button.textContent = 'Already signed up! 👍';
+            button.style.background = 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)';
+            emailInput.disabled = true;
+            console.log('Duplicate email detected');
+        } else {
+            // Success state with smooth transition
+            button.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            button.style.transform = 'scale(1)';
+            button.style.opacity = '1';
+            button.textContent = 'You\'re in! 🎉';
+            button.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+
+            emailInput.style.borderColor = '#10B981';
+            emailInput.style.transform = 'translateY(0) scale(1)';
+            emailInput.disabled = true;
+
+            // Create success confetti
+            createConfetti();
+
+            console.log('Email successfully saved to Google Sheets');
+        }
+
+    } catch (error) {
+        // Error state
+        console.error('Error submitting email:', error);
         button.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
         button.style.transform = 'scale(1)';
         button.style.opacity = '1';
-        button.textContent = 'You\'re in! 🎉';
-        button.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+        button.textContent = 'Oops! Try again';
+        button.style.background = 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)';
 
-        emailInput.style.borderColor = '#10B981';
-        emailInput.style.transform = 'translateY(0) scale(1)';
-        emailInput.disabled = true;
-        button.disabled = true;
-
-        // Create success confetti
-        createConfetti();
-
-        // Optional: Send to backend
-        console.log('Email submitted:', email);
-    }, 1200);
+        // Re-enable button so they can retry
+        setTimeout(() => {
+            button.textContent = 'Get Free Early Access';
+            button.style.background = 'linear-gradient(135deg, #FF6B35 0%, #FF4500 100%)';
+            button.disabled = false;
+        }, 2000);
+    }
 }
 
 // Confetti celebration
