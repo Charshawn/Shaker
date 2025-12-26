@@ -158,8 +158,10 @@ async function handleFormSubmit(e) {
 
     const form = e.target;
     const emailInput = form.querySelector('.email-input');
+    const messageInput = form.querySelector('.message-input');
     const button = form.querySelector('.cta-button');
     const email = emailInput.value.trim();
+    const message = messageInput ? messageInput.value.trim() : '';
 
     if (!email) {
         // Shake effect on empty submission
@@ -178,6 +180,7 @@ async function handleFormSubmit(e) {
         // Submit to Google Sheets
         const formData = new FormData();
         formData.append('email', email);
+        formData.append('message', message);
 
         const response = await fetch(GOOGLE_SHEETS_URL, {
             method: 'POST',
@@ -389,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Smooth input focus effects
-    document.querySelectorAll('.email-input').forEach(input => {
+    document.querySelectorAll('.email-input, .message-input').forEach(input => {
         input.addEventListener('focus', () => {
             input.parentElement.style.transform = 'scale(1.01)';
         });
