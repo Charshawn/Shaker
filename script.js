@@ -2,7 +2,7 @@
 // GOOGLE SHEETS CONFIGURATION
 // ==========================================
 
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwoXZIOB6-PdzWpUYMYZcA8c9vd3qbFLJDTu6W_9B7nusmYdJjExjw1ugD0r3_i1AkQ/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyl6sFytnPJ6zOfWCjqUb7jfu_XLz9nu6uGMyclv_7SUOL2eKrZLPcJKyC_uwyqFmHF/exec';
 
 // ==========================================
 // NARRATIVE JOURNEY ORCHESTRATION
