@@ -2,7 +2,43 @@
 // GOOGLE SHEETS CONFIGURATION
 // ==========================================
 
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyl6sFytnPJ6zOfWCjqUb7jfu_XLz9nu6uGMyclv_7SUOL2eKrZLPcJKyC_uwyqFmHF/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzhEoIOoaXVWTDjPKPsRBRWXR1WDO4Vk_NFBlidKwEgYfvqSxf5Z-n7ZBgfTXFpjoXn/exec';
+
+// ==========================================
+// UTM PARAMETER TRACKING
+// ==========================================
+
+// Extract UTM parameters from URL and store them
+function captureUTMParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmParams = {
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || ''
+    };
+
+    // Only store if at least utm_source exists
+    if (utmParams.utm_source) {
+        localStorage.setItem('utm_params', JSON.stringify(utmParams));
+        console.log('UTM parameters captured:', utmParams);
+    }
+}
+
+// Get stored UTM parameters
+function getUTMParameters() {
+    const stored = localStorage.getItem('utm_params');
+    if (stored) {
+        return JSON.parse(stored);
+    }
+    return {
+        utm_source: 'direct',
+        utm_medium: '',
+        utm_campaign: ''
+    };
+}
+
+// Capture UTM parameters when page loads
+captureUTMParameters();
 
 // ==========================================
 // NARRATIVE JOURNEY ORCHESTRATION
@@ -177,10 +213,18 @@ async function handleFormSubmit(e) {
     button.disabled = true;
 
     try {
+        // Get UTM parameters
+        const utmParams = getUTMParameters();
+
         // Submit to Google Sheets
         const formData = new FormData();
         formData.append('email', email);
         formData.append('message', message);
+        formData.append('utm_source', utmParams.utm_source);
+        formData.append('utm_medium', utmParams.utm_medium);
+        formData.append('utm_campaign', utmParams.utm_campaign);
+
+        console.log('Submitting with UTM:', utmParams);
 
         const response = await fetch(GOOGLE_SHEETS_URL, {
             method: 'POST',
