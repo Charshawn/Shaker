@@ -21,6 +21,18 @@ function captureUTMParameters() {
     if (utmParams.utm_source) {
         localStorage.setItem('utm_params', JSON.stringify(utmParams));
         console.log('UTM parameters captured:', utmParams);
+
+        // Send campaign data to GA4 immediately
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'campaign_visit', {
+                'event_category': 'acquisition',
+                'event_label': 'landing_page',
+                'campaign_source': utmParams.utm_source,
+                'campaign_medium': utmParams.utm_medium,
+                'campaign_name': utmParams.utm_campaign
+            });
+            console.log('GA4 campaign_visit event sent:', utmParams);
+        }
     }
 }
 
@@ -253,6 +265,19 @@ async function handleFormSubmit(e) {
             emailInput.style.borderColor = '#10B981';
             emailInput.style.transform = 'translateY(0) scale(1)';
             emailInput.disabled = true;
+
+            // Send signup event to Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'signup', {
+                    'event_category': 'engagement',
+                    'event_label': 'waitlist_signup',
+                    'campaign_source': utmParams.utm_source,
+                    'campaign_medium': utmParams.utm_medium,
+                    'campaign_name': utmParams.utm_campaign,
+                    'method': 'email_form'
+                });
+                console.log('GA4 signup event sent with campaign:', utmParams);
+            }
 
             // Create success confetti
             createConfetti();

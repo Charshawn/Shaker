@@ -12,7 +12,16 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-Q6NGSCLX9V');
+
+      // Configure GA4 with enhanced tracking and debug mode
+      gtag('config', 'G-Q6NGSCLX9V', {
+        'send_page_view': true,
+        'debug_mode': true,  // See events in real-time (can remove after testing)
+        'cookie_flags': 'SameSite=None;Secure'  // Better cross-domain tracking
+      });
+
+      // Log when GA4 is loaded (helpful for debugging)
+      console.log('GA4 initialized with property ID: G-Q6NGSCLX9V');
     </script>
 </head>
 <body>
