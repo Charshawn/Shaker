@@ -1,4 +1,19 @@
 // ==========================================
+// A/B TEST VARIANT DETECTION
+// ==========================================
+
+// Detect which variant is currently running
+function getVariant() {
+    const path = window.location.pathname;
+    if (path.includes('/a') || path.includes('/version-a')) return 'a';
+    if (path.includes('/b') || path.includes('/version-b')) return 'b';
+    return localStorage.getItem('shaker_variant') || 'unknown';
+}
+
+const CURRENT_VARIANT = getVariant();
+console.log('Running variant:', CURRENT_VARIANT);
+
+// ==========================================
 // GOOGLE SHEETS CONFIGURATION
 // ==========================================
 
@@ -29,9 +44,10 @@ function captureUTMParameters() {
                 'event_label': 'landing_page',
                 'campaign_source': utmParams.utm_source,
                 'campaign_medium': utmParams.utm_medium,
-                'campaign_name': utmParams.utm_campaign
+                'campaign_name': utmParams.utm_campaign,
+                'variant': CURRENT_VARIANT
             });
-            console.log('GA4 campaign_visit event sent:', utmParams);
+            console.log('GA4 campaign_visit event sent:', utmParams, 'variant:', CURRENT_VARIANT);
         }
     }
 }
@@ -274,9 +290,10 @@ async function handleFormSubmit(e) {
                     'campaign_source': utmParams.utm_source,
                     'campaign_medium': utmParams.utm_medium,
                     'campaign_name': utmParams.utm_campaign,
+                    'variant': CURRENT_VARIANT,
                     'method': 'email_form'
                 });
-                console.log('GA4 signup event sent with campaign:', utmParams);
+                console.log('GA4 signup event sent with campaign:', utmParams, 'variant:', CURRENT_VARIANT);
             }
 
             // Create success confetti

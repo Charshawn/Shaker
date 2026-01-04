@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Shaker - Shake up your pantry</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6NGSCLX9V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Configure GA4 with enhanced tracking and debug mode
+      gtag('config', 'G-Q6NGSCLX9V', {
+        'send_page_view': true,
+        'debug_mode': true,  // See events in real-time (can remove after testing)
+        'cookie_flags': 'SameSite=None;Secure'  // Better cross-domain tracking
+      });
+
+      // Log when GA4 is loaded (helpful for debugging)
+      console.log('GA4 initialized with property ID: G-Q6NGSCLX9V');
+    </script>
+</head>
+<body>
+    <!-- Header with Brand Title -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="brand-title">
+                <span class="brand-icon">🧂</span>
+                <h1 class="brand-name">Shaker</h1>
+            </div>
+            <a href="#waitlistForm" class="header-cta-button">Join Waitlist</a>
+        </div>
+    </header>
+
+    <!-- SECTION 1: ENTRANCE (Screen 1 - Hungry) -->
+    <section class="aisle-section entrance-section" data-section="entrance" data-screen="1">
+        <div class="aisle-container">
+            <!-- Left: Narrative -->
+            <div class="narrative-column">
+                <h1 class="anchor-headline">You want to eat healthy. You can't afford it.</h1>
+
+                <div class="typed-narrative" data-section="entrance">
+                    <p class="typed-line" data-delay="300">$4 for ONE protein bar.</p>
+                    <p class="typed-line" data-delay="600">$35 for collagen powder you'll use twice.</p>
+                    <p class="typed-line" data-delay="900">Healthy eating shouldn't cost $200/week.</p>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#waitlistForm" class="hero-cta-button">Find Affordable Options →</a>
+                    <p class="hero-trust-line">Free • Launching Q1 2026 • Budget-friendly ingredients that fit your goals</p>
+                </div>
+
+                <div class="cta-preview">
+                    <p class="cta-hint">↓ See how it works</p>
+                </div>
+            </div>
+
+            <!-- Right: Screen 1 -->
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/1 - Hungry_-Photoroom.png"
+                        alt="Hungry screen - What are you craving?"
+                        class="app-screen active"
+                        data-screen="1"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HABIT (Screen 2 - What are you looking for) -->
+    <section class="aisle-section habit-section" data-section="habit" data-screen="2">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="habit">
+                    <p class="typed-line" data-delay="200">The problem isn't wanting to be healthy.</p>
+                    <p class="typed-line" data-delay="500">It's that healthy food is expensive. And you can't stay in your calorie budget.</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/2 - What are you looking for-Photoroom.png"
+                        alt="What are you looking for screen"
+                        class="app-screen"
+                        data-screen="2"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: OVERLOAD (Screen 3 - Preferences) -->
+    <section class="aisle-section overload-section" data-section="overload" data-screen="3">
+        <!-- Horizontal moving shelf elements -->
+        <div class="shelf-parallax" aria-hidden="true">
+            <div class="shelf-layer shelf-layer-1"></div>
+            <div class="shelf-layer shelf-layer-2"></div>
+            <div class="shelf-layer shelf-layer-3"></div>
+        </div>
+
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="overload">
+                    <p class="typed-line" data-delay="200">Need 120g protein on 1200 calories?</p>
+                    <p class="typed-line" data-delay="500">Budget under $50/week?</p>
+                    <p class="typed-line" data-delay="800">Which ingredients fit BOTH?</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/3 - Preferences-Photoroom.png"
+                        alt="Preferences screen - Filter your preferences"
+                        class="app-screen"
+                        data-screen="3"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: DISCOVERY (Screen 4 - Swipe) -->
+    <section class="aisle-section discovery-section" data-section="discovery" data-screen="4">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="discovery">
+                    <p class="typed-line" data-delay="200">Swipe on ingredients and snacks.</p>
+                    <p class="typed-line" data-delay="500">See prices. See macros. See if it fits YOUR budget and goals.</p>
+                    <p class="typed-line" data-delay="800">Know what you can afford—before you buy.</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container">
+                    <img
+                        src="Demo App Images/4 - swipe.png"
+                        alt="Swipe screen - Match with ingredients like Chia Seeds"
+                        class="app-screen"
+                        data-screen="4"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: STANDOUTS / CONFIDENCE (Screen 5 - Standouts) -->
+    <section class="aisle-section standouts-section" data-section="standouts" data-screen="5">
+        <div class="aisle-container">
+            <div class="narrative-column">
+                <div class="typed-narrative" data-section="standouts">
+                    <p class="typed-line" data-delay="200">Hit your protein goals without breaking the bank.</p>
+                    <p class="typed-line" data-delay="500">Stay in your calorie budget. And your money budget.</p>
+                    <p class="typed-line" data-delay="800">Eat healthy. Affordably.</p>
+                </div>
+            </div>
+
+            <div class="screen-column">
+                <div class="phone-container phone-container-final">
+                    <img
+                        src="Demo App Images/5 - Standouts-Photoroom.png"
+                        alt="Standouts screen - Discover personalized snacks"
+                        class="app-screen"
+                        data-screen="5"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: INVITATION (CTA Moment) -->
+    <section class="invitation-section" data-section="invitation">
+        <div class="invitation-container">
+            <div class="invitation-narrative">
+                <div class="typed-narrative" data-section="invitation">
+                    <h2 class="invitation-headline">
+                        <span class="typed-line" data-delay="200">Ready to match with ingredients & recipes made for you?</span>
+                    </h2>
+                    <p class="invitation-subheadline typed-line" data-delay="500">Join the waitlist for early access when we launch.</p>
+                </div>
+
+                <p class="invitation-supporting">Affordable ingredients that fit your budget AND your goals. • Free • Launching Q1 2026 • Eat healthy without going broke</p>
+            </div>
+
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="form-group">
+                    <input
+                        type="email"
+                        class="email-input"
+                        placeholder="Enter your email for early access"
+                        required
+                        aria-label="Email address"
+                    >
+                    <textarea
+                        class="message-input"
+                        placeholder="Tell us why you're interested (optional)"
+                        rows="3"
+                        aria-label="Message"
+                    ></textarea>
+                    <button type="submit" class="cta-button">
+                        Get Free Early Access
+                    </button>
+                </div>
+                <p class="trust-line">Free • No credit card • Instant access</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">🧂</span>
+                <p class="footer-tagline">Shake up your pantry</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
