@@ -41,20 +41,9 @@
     </div>
 
     <script>
-        // Check if user has already been assigned a version
-        let variant = localStorage.getItem('shaker_variant');
-
-        if (!variant) {
-            // Randomly assign A or B (50/50 split)
-            variant = Math.random() < 0.5 ? 'a' : 'b';
-            localStorage.setItem('shaker_variant', variant);
-            console.log('New visitor assigned to variant:', variant);
-        } else {
-            console.log('Returning visitor, variant:', variant);
-        }
-
-        // Redirect to the assigned version
-        window.location.href = '/' + variant;
+        // Redirect to version A by default
+        // Direct links to /a and /b will work via vercel.json routing
+        window.location.href = '/a';
     </script>
 </body>
 </html>
