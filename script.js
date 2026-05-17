@@ -13,19 +13,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar scroll effect
-let lastScroll = 0;
 const nav = document.querySelector('.nav');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
     if (currentScroll > 100) {
-        nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        nav.style.boxShadow = '0 12px 35px rgba(37, 27, 22, 0.10)';
     } else {
         nav.style.boxShadow = 'none';
     }
-
-    lastScroll = currentScroll;
 });
 
 // Intersection Observer for fade-in animations
@@ -43,33 +40,24 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe flavor cards for animation
-document.querySelectorAll('.flavor-card').forEach((card, index) => {
+// Observe key sections for animation
+document.querySelectorAll('.flavor-card, .story-card, .story-copy, .focus-panel').forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
     card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
     observer.observe(card);
 });
 
-// Observe story section
-const storySection = document.querySelector('.story-content');
-if (storySection) {
-    storySection.style.opacity = '0';
-    storySection.style.transform = 'translateY(30px)';
-    storySection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    observer.observe(storySection);
-}
-
-// Add parallax effect to hero cans (optional, subtle)
+// Add parallax effect to hero cans
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const heroVisual = document.querySelector('.hero-visual');
+    const heroVisual = document.querySelector('.hero-showcase');
 
     if (heroVisual && scrolled < window.innerHeight) {
-        heroVisual.style.transform = `translateY(${scrolled * 0.3}px)`;
+        heroVisual.style.transform = `translateY(${scrolled * 0.12}px)`;
     }
 });
 
 // Console message
-console.log('%cYusa Club', 'font-size: 24px; font-weight: bold; color: #00d4aa;');
-console.log('%cEnergy for the long focus session.', 'font-size: 14px; color: #666;');
+console.log('%cYusa Club', 'font-size: 24px; font-weight: bold; color: #284f38;');
+console.log('%cEnergy for the long focus session.', 'font-size: 14px; color: #5c4a3e;');

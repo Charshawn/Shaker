@@ -1,90 +1,68 @@
 # Yusa Club Website
 
-A modern, clean landing page for Yusa Club — guayusa-powered energy drinks for deep focus and creative work.
+A warm, product-forward landing page for Yusa Club, a guayusa-powered sparkling energy drink built for long focus sessions.
 
-## Features
+## What Is Included
 
-- **Hero Section**: Compelling headline with animated can mockups showcasing all three flavors
-- **Brand Story**: Educational section about guayusa from Ecuador and its benefits
-- **Flavors**: Three distinct product cards for Mango Bloom, Peach Glow, and Agave Still
-- **Responsive Design**: Fully responsive across desktop, tablet, and mobile devices
-- **Smooth Animations**: Intersection Observer API for scroll-triggered fade-in effects
-- **Modern UI**: Clean typography, gradient accents, and smooth interactions
+- Editorial hero section with all three can renders
+- Brand story section with custom botanical artwork
+- Flavor cards for Mango Bloom, Peach Glow, and Acai Still
+- Focus-positioning section with supporting line-art asset
+- Responsive layout for desktop, tablet, and mobile
+- Lightweight JavaScript for smooth scrolling, nav shadow, and section reveal animations
 
 ## File Structure
 
-```
+```text
 yusaclub-website/
-├── index.html      # Main HTML structure
-├── styles.css      # All styling and responsive design
-├── script.js       # Interactive features and animations
-└── README.md       # This file
+├── index.html
+├── styles.css
+├── script.js
+├── README.md
+└── images/
+    ├── AcaiCan.png
+    ├── MangoCan.png
+    ├── PeachCan.png
+    ├── Yusa Logo.png
+    ├── amazon-leaves.svg
+    ├── botanical-pattern.svg
+    └── focus-lines.svg
 ```
 
 ## Local Development
 
-Simply open `index.html` in your browser to view the website locally.
-
-## Deployment Options
-
-### Option 1: Vercel (Recommended)
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run `vercel` in the project directory
-3. Follow the prompts to deploy
-
-### Option 2: Netlify
-1. Go to [netlify.com](https://netlify.com)
-2. Drag and drop the `yusaclub-website` folder
-3. Your site will be live instantly
-
-### Option 3: Custom Domain (yusaclub.com)
-Since you already own yusaclub.com:
-
-1. Deploy using Vercel or Netlify
-2. Add your custom domain in their dashboard
-3. Update your DNS settings to point to their servers
-
-#### DNS Configuration Example (Vercel):
-- **A Record**: `@` → `76.76.21.21`
-- **CNAME**: `www` → `cname.vercel-dns.com`
+Open `index.html` directly in a browser. No build step is required.
 
 ## Customization
 
-### Colors
-Edit the CSS variables in `styles.css` (lines 18-30):
+Product assets live in `images/`. Keep the current filenames if you replace the can renders or logo, and the site will pick them up automatically.
+
+Core design tokens live at the top of `styles.css`:
+
 ```css
---color-primary: #1a1a1a;
---color-accent: #00d4aa;
---color-mango: #ffb84d;
---color-peach: #ffb3ba;
---color-agave: #b5e7a0;
+--ink: #251b16;
+--paper: #fff9ef;
+--leaf: #284f38;
+--mango: #e58b22;
+--peach: #de7d63;
+--acai: #2a1728;
 ```
 
-### Content
-All content is in `index.html` — search for section classes:
-- `.hero` — Main headline
-- `.story` — Brand story
-- `.flavors` — Product cards
+Main content is in `index.html` under:
 
-### Images
-Replace the placeholder `div` elements with actual product images:
-- `.hero-visual .can` elements → Replace with `<img>` tags
-- `.image-placeholder` → Replace with actual guayusa/Ecuador imagery
+- `.hero` for the first screen
+- `.story` for the guayusa origin section
+- `.flavors` for the three product cards
+- `.focus` for the final positioning section
 
-## Next Steps
+## Deployment
 
-1. **Add Real Images**: Replace gradient placeholders with actual product photography
-2. **CTA Integration**: Link "Explore Flavors" buttons to e-commerce or where-to-buy pages
-3. **Email Capture**: Add newsletter signup form in footer
-4. **Analytics**: Add Google Analytics or Plausible tracking
-5. **SEO**: Add meta descriptions, Open Graph tags, and favicon
+This is a static site, so it can be deployed on Vercel, Netlify, GitHub Pages, or any static host.
 
-## Browser Support
+For Vercel with `yusaclub.com`:
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+- A record: `@` to `76.76.21.21`
+- CNAME: `www` to `cname.vercel-dns.com`
 
 ## License
 
