@@ -5,6 +5,7 @@ A warm, product-forward landing page for Yusa Club, a guayusa-powered sparkling 
 ## What Is Included
 
 - Editorial hero section with all three can renders
+- AI-generated product lifestyle imagery derived from the Yusa can references
 - Brand story section with custom botanical artwork
 - Flavor cards for Mango Bloom, Peach Glow, and Acai Still
 - Focus-positioning section with supporting line-art asset
@@ -24,6 +25,16 @@ yusaclub-website/
     ├── MangoCan.png
     ├── PeachCan.png
     ├── Yusa Logo.png
+    ├── generated/
+    │   ├── AcaiFront.png
+    │   ├── AcaiBack.png
+    │   ├── MangoFront.png
+    │   ├── MangoBack.png
+    │   ├── PeachFront.png
+    │   ├── PeachBack.png
+    │   ├── yusa-mango-hero.webp
+    │   ├── yusa-peach-lifestyle.webp
+    │   └── yusa-acai-lifestyle.webp
     ├── amazon-leaves.svg
     ├── botanical-pattern.svg
     └── focus-lines.svg

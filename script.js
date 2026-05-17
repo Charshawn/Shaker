@@ -41,7 +41,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe key sections for animation
-document.querySelectorAll('.flavor-card, .story-card, .story-copy, .focus-panel').forEach((card, index) => {
+document.querySelectorAll('.flavor-card, .story-card, .story-copy, .moment-card, .focus-panel').forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
     card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
