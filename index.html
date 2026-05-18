@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yusa Club | Guayusa Energy for Focus</title>
-    <meta name="description" content="Yusa is guayusa-powered energy for long focus sessions. Calm caffeine, real fruit flavor, no crash.">
+    <meta name="description" content="Yusa is guayusa-powered sparkling energy for long focus sessions. Calm caffeine, real fruit flavor, no crash.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="topbar">Free shipping coming soon for launch orders</div>
+
     <nav class="nav">
         <div class="container nav-content">
             <a href="#" class="logo" aria-label="Yusa Club home">
                 <img src="images/Yusa Logo.png" alt="Yusa" class="logo-img">
             </a>
             <div class="nav-links" aria-label="Primary navigation">
+                <a href="#flavors">Shop</a>
                 <a href="#story">Story</a>
-                <a href="#flavors">Flavors</a>
-                <a href="#focus">Focus</a>
+                <a href="#ingredients">Ingredients</a>
             </div>
             <a href="#flavors" class="nav-button">Shop soon</a>
         </div>
@@ -27,166 +29,136 @@
 
     <main>
         <section class="hero">
-            <div class="hero-art botanical-left" aria-hidden="true"></div>
-            <div class="hero-art botanical-right" aria-hidden="true"></div>
-            <div class="container hero-content">
+            <div class="container hero-grid">
                 <div class="hero-copy">
-                    <p class="eyebrow">Guayusa-powered sparkling energy</p>
-                    <h1>Energy for the long focus session.</h1>
+                    <p class="eyebrow">Traditional Amazon leaf. Modern focus.</p>
+                    <h1>Guayusa energy without the edge.</h1>
                     <p class="hero-subtitle">
-                        Clean, calm caffeine from the Amazon rainforest, brewed for the creative stretch:
-                        the 4-hour deep work block, the studio night, the marathon focus session.
+                        Sparkling guayusa drinks made for deep work, studio nights, and the long creative stretch.
                     </p>
                     <div class="hero-actions">
-                        <a href="#flavors" class="btn btn-primary">Explore flavors</a>
-                        <a href="#story" class="btn btn-secondary">Read the story</a>
-                    </div>
-                    <div class="hero-points" aria-label="Product benefits">
-                        <div>
-                            <span>150mg</span>
-                            <p>natural caffeine</p>
-                        </div>
-                        <div>
-                            <span>L-theanine</span>
-                            <p>alert calm</p>
-                        </div>
-                        <div>
-                            <span>0g</span>
-                            <p>sugar</p>
-                        </div>
+                        <a href="#flavors" class="btn btn-primary">Shop flavors</a>
+                        <a href="#ingredients" class="btn btn-secondary">What is guayusa?</a>
                     </div>
                 </div>
-
-                <div class="hero-showcase" aria-label="Yusa Mango product scene">
-                    <div class="stage-card">
-                        <span>No crash. No jitters.</span>
-                        <strong>Just flow.</strong>
-                    </div>
+                <div class="hero-product" aria-label="Yusa product lineup">
+                    <img src="images/generated/PeachFront.png" alt="Yusa Peach can" class="hero-can side-can">
+                    <img src="images/generated/MangoFront.png" alt="Yusa Mango can" class="hero-can main-can">
+                    <img src="images/generated/AcaiFront.png" alt="Yusa Acai can" class="hero-can side-can">
                 </div>
             </div>
         </section>
 
-        <section class="marquee" aria-label="Brand promise">
-            <div class="marquee-track">
-                <span>Powered by the Amazon</span>
-                <span>Built for your best work</span>
-                <span>Drink different</span>
-                <span>Focus longer</span>
-                <span>Powered by the Amazon</span>
-                <span>Built for your best work</span>
+        <section class="press-strip" aria-label="Brand highlights">
+            <div class="container press-grid">
+                <p>No crash</p>
+                <p>No jitters</p>
+                <p>0g sugar</p>
+                <p>150mg natural caffeine</p>
+            </div>
+        </section>
+
+        <section id="flavors" class="shop section-pad">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Shop Yusa</p>
+                    <h2>Three flavors for three focus modes.</h2>
+                </div>
+                <div class="product-grid">
+                    <article class="product-card mango">
+                        <div class="product-image">
+                            <img src="images/generated/MangoFront.png" alt="Yusa Mango Bloom can">
+                        </div>
+                        <div class="product-copy">
+                            <p class="product-meta">Morning energy</p>
+                            <h3>Mango Bloom</h3>
+                            <p>Sun-ripe and bright. Crack it open when the day is just beginning.</p>
+                            <a href="mailto:hello@yusaclub.com?subject=Yusa Mango Bloom" class="product-button">Notify me</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card peach">
+                        <div class="product-image">
+                            <img src="images/generated/PeachFront.png" alt="Yusa Peach Glow can">
+                        </div>
+                        <div class="product-copy">
+                            <p class="product-meta">Afternoon flow</p>
+                            <h3>Peach Glow</h3>
+                            <p>Soft and just-ripe. Built for the long afternoon creative stretch.</p>
+                            <a href="mailto:hello@yusaclub.com?subject=Yusa Peach Glow" class="product-button">Notify me</a>
+                        </div>
+                    </article>
+
+                    <article class="product-card acai">
+                        <div class="product-image">
+                            <img src="images/generated/AcaiFront.png" alt="Yusa Acai Still can">
+                        </div>
+                        <div class="product-copy">
+                            <p class="product-meta">Evening calm</p>
+                            <h3>Acai Still</h3>
+                            <p>Rich, smooth, and grounded for late sessions without feeling wired.</p>
+                            <a href="mailto:hello@yusaclub.com?subject=Yusa Acai Still" class="product-button">Notify me</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-band">
+            <div class="container">
+                <p>Powered by the Amazon. Built for your best work.</p>
             </div>
         </section>
 
         <section id="story" class="story section-pad">
             <div class="container story-grid">
-                <div class="story-visual">
-                    <img src="images/amazon-leaves.svg" alt="" class="story-asset" aria-hidden="true">
-                    <div class="story-card">
-                        <p class="eyebrow">From Ecuador</p>
-                        <h2>A leaf brewed for long hours.</h2>
-                        <p>
-                            Indigenous communities have brewed guayusa for centuries: not to spike and crash,
-                            but to sustain. To focus. To stay sharp through the long hours.
-                        </p>
-                    </div>
+                <div class="story-image">
+                    <img src="images/generated/yusa-mango-hero.webp" alt="Yusa Mango can with guayusa leaves and mango">
                 </div>
                 <div class="story-copy">
-                    <p class="section-kicker">The Yusa difference</p>
-                    <h2 class="section-title">Fully awake, never wired.</h2>
+                    <p class="eyebrow">Our story</p>
+                    <h2>A centuries-old leaf, canned for the modern workday.</h2>
                     <p>
-                        We put that same leaf in a can. Guayusa carries caffeine alongside L-theanine and
-                        theobromine, creating smoother, steadier energy than the usual sugar-heavy rush.
+                        Deep in Ecuador, indigenous communities have brewed guayusa for centuries: not to spike and crash,
+                        but to sustain. We put that same leaf in a can with real fruit flavor and a smoother kind of lift.
                     </p>
-                    <div class="ingredient-list">
-                        <div>
-                            <span>Caffeine</span>
-                            <p>Clean lift for deep work.</p>
-                        </div>
-                        <div>
-                            <span>L-theanine</span>
-                            <p>Calm focus without the edge.</p>
-                        </div>
-                        <div>
-                            <span>Theobromine</span>
-                            <p>A softer, longer-lasting feel.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="flavors" class="flavors section-pad">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="section-kicker">Three flavors</p>
-                    <h2 class="section-title">Pick your focus mood.</h2>
-                </div>
-                <div class="flavors-grid">
-                    <article class="flavor-card mango">
-                        <div class="flavor-image">
-                            <img src="images/generated/MangoFront.png" alt="Yusa Mango Bloom can">
-                        </div>
-                        <div class="flavor-copy">
-                            <p class="flavor-meta">Morning energy</p>
-                            <h3>Mango <span>Bloom</span></h3>
-                            <p>Sun-ripe and bright. The one to crack open when the day is just beginning.</p>
-                        </div>
-                    </article>
-
-                    <article class="flavor-card peach">
-                        <div class="flavor-image">
-                            <img src="images/generated/PeachFront.png" alt="Yusa Peach Glow can">
-                        </div>
-                        <div class="flavor-copy">
-                            <p class="flavor-meta">Afternoon flow</p>
-                            <h3>Peach <span>Glow</span></h3>
-                            <p>Soft and just-ripe. Built for the long afternoon creative stretch.</p>
-                        </div>
-                    </article>
-
-                    <article class="flavor-card acai">
-                        <div class="flavor-image">
-                            <img src="images/generated/AcaiFront.png" alt="Yusa Acai Still can">
-                        </div>
-                        <div class="flavor-copy">
-                            <p class="flavor-meta">Evening calm</p>
-                            <h3>Acai <span>Still</span></h3>
-                            <p>Rich, smooth, and grounded for late sessions without feeling wired.</p>
-                        </div>
-                    </article>
+                    <a href="#ingredients" class="text-link">See what is inside</a>
                 </div>
             </div>
         </section>
 
         <section class="moments section-pad" aria-label="Yusa product photography">
             <div class="container moments-grid">
-                <figure class="moment-card large">
-                    <img src="images/generated/yusa-mango-hero.webp" alt="Yusa Mango can in a warm botanical studio scene">
-                    <figcaption>Morning lift</figcaption>
+                <figure class="moment-card">
+                    <img src="images/generated/yusa-peach-lifestyle.webp" alt="Yusa Peach can with peach and leaves">
+                    <figcaption>Peach Glow</figcaption>
                 </figure>
                 <figure class="moment-card">
-                    <img src="images/generated/yusa-peach-lifestyle.webp" alt="Yusa Peach can with peach and guayusa leaves">
-                    <figcaption>Afternoon flow</figcaption>
-                </figure>
-                <figure class="moment-card">
-                    <img src="images/generated/yusa-acai-lifestyle.webp" alt="Yusa Acai can with acai berries and leaves">
-                    <figcaption>Evening calm</figcaption>
+                    <img src="images/generated/yusa-acai-lifestyle.webp" alt="Yusa Acai can with berries and leaves">
+                    <figcaption>Acai Still</figcaption>
                 </figure>
             </div>
         </section>
 
-        <section id="focus" class="focus section-pad">
-            <div class="container focus-grid">
+        <section id="ingredients" class="ingredients section-pad">
+            <div class="container ingredients-grid">
                 <div>
-                    <p class="section-kicker">For creative endurance</p>
-                    <h2 class="section-title">A drink for the work after the first hour.</h2>
+                    <p class="eyebrow">What is inside</p>
+                    <h2>Alert calm from a better caffeine source.</h2>
                 </div>
-                <div class="focus-panel">
-                    <img src="images/focus-lines.svg" alt="" aria-hidden="true">
-                    <p>
-                        Yusa is made for the part of the session where most energy drinks get loud.
-                        Smooth flavor, soft carbonation, and a focused lift that stays out of your way.
-                    </p>
+                <div class="ingredient-list">
+                    <div>
+                        <span>Guayusa</span>
+                        <p>Caffeine from an Amazonian leaf traditionally brewed for long-lasting focus.</p>
+                    </div>
+                    <div>
+                        <span>L-theanine</span>
+                        <p>Helps create a calmer, smoother feel than standard energy drinks.</p>
+                    </div>
+                    <div>
+                        <span>Theobromine</span>
+                        <p>A softer lift that complements caffeine without feeling frantic.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -196,12 +168,12 @@
         <div class="container footer-content">
             <div>
                 <img src="images/Yusa Logo.png" alt="Yusa" class="footer-logo-img">
-                <p>Energy for the long focus session.</p>
+                <p>No crash. No jitters. Just flow.</p>
             </div>
             <div class="footer-links">
+                <a href="#flavors">Shop</a>
                 <a href="#story">Story</a>
-                <a href="#flavors">Flavors</a>
-                <a href="#focus">Focus</a>
+                <a href="#ingredients">Ingredients</a>
                 <a href="mailto:hello@yusaclub.com">hello@yusaclub.com</a>
             </div>
         </div>

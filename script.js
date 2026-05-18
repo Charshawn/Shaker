@@ -41,7 +41,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe key sections for animation
-document.querySelectorAll('.flavor-card, .story-card, .story-copy, .moment-card, .focus-panel').forEach((card, index) => {
+document.querySelectorAll('.product-card, .story-copy, .story-image, .moment-card, .ingredient-list').forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
     card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
@@ -51,7 +51,7 @@ document.querySelectorAll('.flavor-card, .story-card, .story-copy, .moment-card,
 // Add parallax effect to hero cans
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const heroVisual = document.querySelector('.hero-showcase');
+    const heroVisual = document.querySelector('.hero-product');
 
     if (heroVisual && scrolled < window.innerHeight) {
         heroVisual.style.transform = `translateY(${scrolled * 0.12}px)`;
@@ -59,5 +59,5 @@ window.addEventListener('scroll', () => {
 });
 
 // Console message
-console.log('%cYusa Club', 'font-size: 24px; font-weight: bold; color: #284f38;');
-console.log('%cEnergy for the long focus session.', 'font-size: 14px; color: #5c4a3e;');
+console.log('%cYusa Club', 'font-size: 24px; font-weight: bold; color: #8d164e;');
+console.log('%cGuayusa energy without the edge.', 'font-size: 14px; color: #66565f;');
